@@ -43,31 +43,11 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<NamedThing>  (
-    CLOSED {
-       (  $<NamedThing_tes> (  schema1:name @linkml:String ? ;
-             schema1:description @linkml:String ?
-          ) ;
-          rdf:type [ schema1:Thing ]
-       )
-    } OR @<Person>
-)
-
-<Person> CLOSED {
-    (  $<Person_tes> (  &<NamedThing_tes> ;
-          rdf:type [ schema1:Thing ] ? ;
-          schema1:email @linkml:String ? ;
-          schema1:birthDate @linkml:Date ? ;
-          <age_in_years> @linkml:Integer ? ;
-          <vital_status> @<PersonStatus> ?
+<NamedThing> CLOSED {
+    (  $<NamedThing_tes> (  schema1:name @linkml:String ? ;
+          schema1:description @linkml:String ?
        ) ;
-       rdf:type [ <Person> ]
-    )
-}
-
-<PersonCollection> CLOSED {
-    (  $<PersonCollection_tes> <entries> @<Person> * ;
-       rdf:type [ <PersonCollection> ] ?
+       rdf:type [ schema1:Thing ]
     )
 }
 
