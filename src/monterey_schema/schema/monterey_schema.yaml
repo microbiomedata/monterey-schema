@@ -22,7 +22,15 @@ imports:
 
 classes:
 
+  Root:
+    abstract: true
+
+  AnonymousThing:
+    is_a: Root
+    abstract: true
+
   NamedThing:
+    is_a: Root
     description: >-
       A generic grouping for any identifiable entity
     slots:
@@ -30,6 +38,22 @@ classes:
       - name
       - description
     class_uri: schema:Thing
+
+  MaterialOrData:
+    is_a: NamedThing
+
+  MaterialEntity:
+    is_a: MaterialOrData
+
+  DataEntity:
+    is_a: MaterialOrData
+
+  PlannedProcess:
+    is_a: NamedThing
+    slots:
+      - has_inputs
+      - has_outputs
+
 
 #  Person:
 #    is_a: NamedThing
@@ -55,6 +79,16 @@ classes:
 #        inlined: true
 
 slots:
+  has_inputs:
+    domain: PlannedProcess
+    range: MaterialOrData
+    multivalued: true
+
+  has_outputs:
+    domain: PlannedProcess
+    range: MaterialOrData
+    multivalued: true
+
   id:
     identifier: true
     slot_uri: schema:identifier

@@ -43,11 +43,69 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<NamedThing> CLOSED {
-    (  $<NamedThing_tes> (  schema1:name @linkml:String ? ;
-          schema1:description @linkml:String ?
+<AnonymousThing> {
+    (  $<AnonymousThing_tes> (  &<Root_tes> ;
+          rdf:type [ <Root> ] ?
        ) ;
-       rdf:type [ schema1:Thing ]
+       rdf:type [ <AnonymousThing> ] ?
+    )
+}
+
+<DataEntity> CLOSED {
+    (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
+          rdf:type [ <MaterialOrData> ] ?
+       ) ;
+       rdf:type [ <DataEntity> ]
+    )
+}
+
+<MaterialEntity> CLOSED {
+    (  $<MaterialEntity_tes> (  &<MaterialOrData_tes> ;
+          rdf:type [ <MaterialOrData> ] ?
+       ) ;
+       rdf:type [ <MaterialEntity> ]
+    )
+}
+
+<MaterialOrData>  (
+    CLOSED {
+       (  $<MaterialOrData_tes> (  &<NamedThing_tes> ;
+             rdf:type [ schema1:Thing ] ?
+          ) ;
+          rdf:type [ <MaterialOrData> ]
+       )
+    } OR @<DataEntity> OR @<MaterialEntity>
+)
+
+<NamedThing>  (
+    CLOSED {
+       (  $<NamedThing_tes> (  &<Root_tes> ;
+             rdf:type [ <Root> ] ? ;
+             schema1:name @linkml:String ? ;
+             schema1:description @linkml:String ?
+          ) ;
+          rdf:type [ schema1:Thing ]
+       )
+    } OR @<MaterialOrData> OR @<PlannedProcess>
+)
+
+<PlannedProcess> CLOSED {
+    (  $<PlannedProcess_tes> (  &<NamedThing_tes> ;
+          rdf:type [ schema1:Thing ] ? ;
+          <has_inputs> @<MaterialOrData> * ;
+          <has_outputs> @<MaterialOrData> *
+       ) ;
+       rdf:type [ <PlannedProcess> ]
+    )
+}
+
+<Root>  (
+    @<AnonymousThing> OR @<NamedThing>
+)
+
+<Root_struct> {
+    (  $<Root_tes> rdf:type . * ;
+       rdf:type [ <Root> ] ?
     )
 }
 

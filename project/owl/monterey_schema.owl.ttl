@@ -6,17 +6,42 @@
 @prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-monterey_schema:NamedThing a owl:Class,
+monterey_schema:AnonymousThing a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "NamedThing" ;
-    skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema1:Thing ;
+    rdfs:label "AnonymousThing" ;
+    rdfs:subClassOf monterey_schema:Root ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:DataEntity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "DataEntity" ;
+    rdfs:subClassOf monterey_schema:MaterialOrData ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:MaterialEntity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MaterialEntity" ;
+    rdfs:subClassOf monterey_schema:MaterialOrData ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "description" ;
     skos:definition "A human-readable description for a thing" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:has_inputs a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_inputs" ;
+    rdfs:domain monterey_schema:PlannedProcess ;
+    rdfs:range monterey_schema:MaterialOrData ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:has_outputs a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "has_outputs" ;
+    rdfs:domain monterey_schema:PlannedProcess ;
+    rdfs:range monterey_schema:MaterialOrData ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:id a owl:ObjectProperty,
@@ -30,6 +55,31 @@ monterey_schema:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
     skos:definition "A human-readable name for a thing" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:NamedThing a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "NamedThing" ;
+    rdfs:subClassOf monterey_schema:Root ;
+    skos:definition "A generic grouping for any identifiable entity" ;
+    skos:exactMatch schema1:Thing ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:PlannedProcess a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "PlannedProcess" ;
+    rdfs:subClassOf monterey_schema:NamedThing ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:Root a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Root" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:MaterialOrData a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MaterialOrData" ;
+    rdfs:subClassOf monterey_schema:NamedThing ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 <https://w3id.org/microbiomedata/monterey-schema> a owl:Ontology ;
