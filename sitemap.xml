@@ -81,21 +81,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/Person/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/PersonCollection/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/PersonStatus/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Sparqlpath/</loc>
          <lastmod>2023-10-11</lastmod>
          <changefreq>daily</changefreq>
@@ -126,22 +111,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/age_in_years/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/birth_date/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://microbiomedata.github.io/monterey-schema/description/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/entries/</loc>
          <lastmod>2023-10-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -157,16 +127,6 @@
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/name/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/primary_email/</loc>
-         <lastmod>2023-10-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://microbiomedata.github.io/monterey-schema/vital_status/</loc>
          <lastmod>2023-10-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
