@@ -1,7 +1,45 @@
+interface AnonymousThing
+  {
+  }
+
+type DataEntity
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type MaterialEntity
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type MaterialOrData
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
 type NamedThing
   {
     id: Uriorcurie!
     name: String
     description: String
+  }
+
+type PlannedProcess
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    hasInputs: [MaterialOrData]
+    hasOutputs: [MaterialOrData]
+  }
+
+interface Root
+  {
   }
 

@@ -1,7 +1,33 @@
+message DataEntity
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
+message MaterialEntity
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
+message MaterialOrData
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
 // A generic grouping for any identifiable entity
 message NamedThing
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
+ }
+message PlannedProcess
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  materialOrData hasInputs = 0
+ repeated  materialOrData hasOutputs = 0
  }
