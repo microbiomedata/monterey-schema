@@ -1,6 +1,6 @@
 {
   "name": "monterey-schema",
-  "description": "Proving grounds for a refactored nmdc-schmea",
+  "description": "Proving grounds for a refactored nmdc-schema",
   "title": "monterey-schema",
   "see_also": [
     "https://microbiomedata.github.io/monterey-schema"
@@ -20,16 +20,8 @@
       "prefix_reference": "https://w3id.org/linkml/"
     },
     {
-      "prefix_prefix": "biolink",
-      "prefix_reference": "https://w3id.org/biolink/"
-    },
-    {
       "prefix_prefix": "schema",
       "prefix_reference": "http://schema.org/"
-    },
-    {
-      "prefix_prefix": "PATO",
-      "prefix_reference": "http://purl.obolibrary.org/obo/PATO_"
     },
     {
       "prefix_prefix": "example",
@@ -348,32 +340,6 @@
       "@type": "TypeDefinition"
     }
   ],
-  "enums": [
-    {
-      "name": "PersonStatus",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/PersonStatus",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "permissible_values": [
-        {
-          "text": "ALIVE",
-          "description": "the person is living",
-          "meaning": "PATO:0001421"
-        },
-        {
-          "text": "DEAD",
-          "description": "the person is deceased",
-          "meaning": "PATO:0001422"
-        },
-        {
-          "text": "UNKNOWN",
-          "description": "the vital status is not known",
-          "todos": [
-            "map this to an ontology"
-          ]
-        }
-      ]
-    }
-  ],
   "slots": [
     {
       "name": "id",
@@ -424,100 +390,6 @@
       ],
       "range": "string",
       "@type": "SlotDefinition"
-    },
-    {
-      "name": "primary_email",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/primary_email",
-      "description": "The main email address of a person",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "slot_uri": "http://schema.org/email",
-      "owner": "Person",
-      "domain_of": [
-        "Person"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "birth_date",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/birth_date",
-      "description": "Date on which a person is born",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "mappings": [
-        "http://schema.org/birthDate"
-      ],
-      "slot_uri": "http://schema.org/birthDate",
-      "owner": "Person",
-      "domain_of": [
-        "Person"
-      ],
-      "range": "date",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "age_in_years",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/age_in_years",
-      "description": "Number of years since birth",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/age_in_years",
-      "owner": "Person",
-      "domain_of": [
-        "Person"
-      ],
-      "range": "integer",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "vital_status",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/vital_status",
-      "description": "living or dead status",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/vital_status",
-      "owner": "Person",
-      "domain_of": [
-        "Person"
-      ],
-      "range": "PersonStatus",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "personCollection__entries",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/entries",
-      "multivalued": true,
-      "alias": "entries",
-      "owner": "PersonCollection",
-      "domain_of": [
-        "PersonCollection"
-      ],
-      "range": "Person",
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "Person_primary_email",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/primary_email",
-      "description": "The main email address of a person",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "is_a": "primary_email",
-      "domain": "Person",
-      "slot_uri": "http://schema.org/email",
-      "alias": "primary_email",
-      "owner": "Person",
-      "domain_of": [
-        "Person"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "primary_email",
-      "range": "string",
-      "pattern": "^\\S+@[\\S+\\.]+\\S+",
-      "@type": "SlotDefinition"
     }
   ],
   "classes": [
@@ -537,54 +409,13 @@
       "slot_usage": {},
       "class_uri": "http://schema.org/Thing",
       "@type": "ClassDefinition"
-    },
-    {
-      "name": "Person",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Person",
-      "description": "Represents a Person",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "is_a": "NamedThing",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "Person_primary_email",
-        "birth_date",
-        "age_in_years",
-        "vital_status"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Person",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "PersonCollection",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/PersonCollection",
-      "description": "A holder for Person objects",
-      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "slots": [
-        "personCollection__entries"
-      ],
-      "slot_usage": {},
-      "attributes": [
-        {
-          "name": "entries",
-          "multivalued": true,
-          "range": "Person",
-          "inlined": true,
-          "@type": "SlotDefinition"
-        }
-      ],
-      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/PersonCollection",
-      "tree_root": true,
-      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "monterey_schema.yaml",
-  "source_file_date": "2023-10-11T13:50:44",
-  "source_file_size": 2233,
-  "generation_date": "2023-10-11T14:15:36",
+  "source_file_date": "2023-10-11T14:32:27",
+  "source_file_size": 2433,
+  "generation_date": "2023-10-11T14:42:48",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/monterey_schema.context.jsonld",

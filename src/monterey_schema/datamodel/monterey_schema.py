@@ -1,9 +1,9 @@
 # Auto generated from monterey_schema.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-11T14:15:39
+# Generation date: 2023-10-11T14:42:50
 # Schema: monterey-schema
 #
 # id: https://w3id.org/microbiomedata/monterey-schema
-# description: Proving grounds for a refactored nmdc-schmea
+# description: Proving grounds for a refactored nmdc-schema
 # license: MIT
 
 import dataclasses
@@ -21,8 +21,8 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Date, Integer, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URIorCURIE, XSDDate
+from linkml_runtime.linkml_model.types import String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import URIorCURIE
 
 metamodel_version = "1.7.0"
 version = None
@@ -31,8 +31,6 @@ version = None
 dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 
 # Namespaces
-PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
-BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 MONTEREY_SCHEMA = CurieNamespace('monterey_schema', 'https://w3id.org/microbiomedata/monterey-schema/')
@@ -44,10 +42,6 @@ DEFAULT_ = MONTEREY_SCHEMA
 
 # Class references
 class NamedThingId(URIorCURIE):
-    pass
-
-
-class PersonId(NamedThingId):
     pass
 
 
@@ -82,83 +76,8 @@ class NamedThing(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
-@dataclass
-class Person(NamedThing):
-    """
-    Represents a Person
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Person
-    class_class_curie: ClassVar[str] = "monterey_schema:Person"
-    class_name: ClassVar[str] = "Person"
-    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Person
-
-    id: Union[str, PersonId] = None
-    primary_email: Optional[str] = None
-    birth_date: Optional[Union[str, XSDDate]] = None
-    age_in_years: Optional[int] = None
-    vital_status: Optional[Union[str, "PersonStatus"]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PersonId):
-            self.id = PersonId(self.id)
-
-        if self.primary_email is not None and not isinstance(self.primary_email, str):
-            self.primary_email = str(self.primary_email)
-
-        if self.birth_date is not None and not isinstance(self.birth_date, XSDDate):
-            self.birth_date = XSDDate(self.birth_date)
-
-        if self.age_in_years is not None and not isinstance(self.age_in_years, int):
-            self.age_in_years = int(self.age_in_years)
-
-        if self.vital_status is not None and not isinstance(self.vital_status, PersonStatus):
-            self.vital_status = PersonStatus(self.vital_status)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class PersonCollection(YAMLRoot):
-    """
-    A holder for Person objects
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.PersonCollection
-    class_class_curie: ClassVar[str] = "monterey_schema:PersonCollection"
-    class_name: ClassVar[str] = "PersonCollection"
-    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.PersonCollection
-
-    entries: Optional[Union[Dict[Union[str, PersonId], Union[dict, Person]], List[Union[dict, Person]]]] = empty_dict()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        self._normalize_inlined_as_dict(slot_name="entries", slot_type=Person, key_name="id", keyed=True)
-
-        super().__post_init__(**kwargs)
-
-
 # Enumerations
-class PersonStatus(EnumDefinitionImpl):
 
-    ALIVE = PermissibleValue(
-        text="ALIVE",
-        description="the person is living",
-        meaning=PATO["0001421"])
-    DEAD = PermissibleValue(
-        text="DEAD",
-        description="the person is deceased",
-        meaning=PATO["0001422"])
-    UNKNOWN = PermissibleValue(
-        text="UNKNOWN",
-        description="the vital status is not known")
-
-    _defn = EnumDefinition(
-        name="PersonStatus",
-    )
 
 # Slots
 class slots:
@@ -172,22 +91,3 @@ slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
 
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=MONTEREY_SCHEMA.description, domain=None, range=Optional[str])
-
-slots.primary_email = Slot(uri=SCHEMA.email, name="primary_email", curie=SCHEMA.curie('email'),
-                   model_uri=MONTEREY_SCHEMA.primary_email, domain=None, range=Optional[str])
-
-slots.birth_date = Slot(uri=SCHEMA.birthDate, name="birth_date", curie=SCHEMA.curie('birthDate'),
-                   model_uri=MONTEREY_SCHEMA.birth_date, domain=None, range=Optional[Union[str, XSDDate]])
-
-slots.age_in_years = Slot(uri=MONTEREY_SCHEMA.age_in_years, name="age_in_years", curie=MONTEREY_SCHEMA.curie('age_in_years'),
-                   model_uri=MONTEREY_SCHEMA.age_in_years, domain=None, range=Optional[int])
-
-slots.vital_status = Slot(uri=MONTEREY_SCHEMA.vital_status, name="vital_status", curie=MONTEREY_SCHEMA.curie('vital_status'),
-                   model_uri=MONTEREY_SCHEMA.vital_status, domain=None, range=Optional[Union[str, "PersonStatus"]])
-
-slots.personCollection__entries = Slot(uri=MONTEREY_SCHEMA.entries, name="personCollection__entries", curie=MONTEREY_SCHEMA.curie('entries'),
-                   model_uri=MONTEREY_SCHEMA.personCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, PersonId], Union[dict, Person]], List[Union[dict, Person]]]])
-
-slots.Person_primary_email = Slot(uri=SCHEMA.email, name="Person_primary_email", curie=SCHEMA.curie('email'),
-                   model_uri=MONTEREY_SCHEMA.Person_primary_email, domain=Person, range=Optional[str],
-                   pattern=re.compile(r'^\S+@[\S+\.]+\S+'))
