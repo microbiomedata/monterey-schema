@@ -1,5 +1,5 @@
 # Auto generated from monterey_schema.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-12T00:33:04
+# Generation date: 2023-10-12T00:47:35
 # Schema: monterey-schema
 #
 # id: https://w3id.org/microbiomedata/monterey-schema
@@ -58,10 +58,6 @@ class DataEntityId(MaterialOrDataId):
     pass
 
 
-class DatabaseId(DataEntityId):
-    pass
-
-
 class PlannedProcessId(NamedThingId):
     pass
 
@@ -78,14 +74,23 @@ class DataGenerationId(PlannedProcessId):
     pass
 
 
-@dataclass
-class Root(YAMLRoot):
+class NmdcClass(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Root
-    class_class_curie: ClassVar[str] = "monterey_schema:Root"
-    class_name: ClassVar[str] = "Root"
-    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Root
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.NmdcClass
+    class_class_curie: ClassVar[str] = "monterey_schema:NmdcClass"
+    class_name: ClassVar[str] = "NmdcClass"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.NmdcClass
+
+
+@dataclass
+class AnonymousThing(NmdcClass):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
+    class_class_curie: ClassVar[str] = "monterey_schema:AnonymousThing"
+    class_name: ClassVar[str] = "AnonymousThing"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
 
     type: Union[str, URIorCURIE] = None
 
@@ -93,6 +98,42 @@ class Root(YAMLRoot):
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
         self.type = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class NamedThing(NmdcClass):
+    """
+    A generic grouping for any identifiable entity
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SCHEMA.Thing
+    class_class_curie: ClassVar[str] = "schema:Thing"
+    class_name: ClassVar[str] = "NamedThing"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.NamedThing
+
+    id: Union[str, NamedThingId] = None
+    type: Union[str, URIorCURIE] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, NamedThingId):
+            self.id = NamedThingId(self.id)
+
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
 
         super().__post_init__(**kwargs)
 
@@ -120,60 +161,6 @@ class Root(YAMLRoot):
                                  f"has no subclass with ['class_class_curie', 'class_class_uri', 'class_model_uri']='{kwargs[type_designator]}'")
             return super().__new__(target_cls,*args,**kwargs)
 
-
-
-@dataclass
-class AnonymousThing(Root):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
-    class_class_curie: ClassVar[str] = "monterey_schema:AnonymousThing"
-    class_name: ClassVar[str] = "AnonymousThing"
-    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
-
-    type: Union[str, URIorCURIE] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-
-        super().__post_init__(**kwargs)
-        if self._is_empty(self.type):
-            self.MissingRequiredField("type")
-        self.type = str(self.class_class_curie)
-
-
-@dataclass
-class NamedThing(Root):
-    """
-    A generic grouping for any identifiable entity
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = SCHEMA.Thing
-    class_class_curie: ClassVar[str] = "schema:Thing"
-    class_name: ClassVar[str] = "NamedThing"
-    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.NamedThing
-
-    id: Union[str, NamedThingId] = None
-    type: Union[str, URIorCURIE] = None
-    name: Optional[str] = None
-    description: Optional[str] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, NamedThingId):
-            self.id = NamedThingId(self.id)
-
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
-        super().__post_init__(**kwargs)
-        if self._is_empty(self.type):
-            self.MissingRequiredField("type")
-        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -248,28 +235,13 @@ class DataEntity(MaterialOrData):
         self.type = str(self.class_class_curie)
 
 
-@dataclass
-class Database(DataEntity):
+class Database(NmdcClass):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Database
     class_class_curie: ClassVar[str] = "monterey_schema:Database"
     class_name: ClassVar[str] = "Database"
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Database
-
-    id: Union[str, DatabaseId] = None
-    type: Union[str, URIorCURIE] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, DatabaseId):
-            self.id = DatabaseId(self.id)
-
-        super().__post_init__(**kwargs)
-        if self._is_empty(self.type):
-            self.MissingRequiredField("type")
-        self.type = str(self.class_class_curie)
 
 
 @dataclass

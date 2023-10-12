@@ -458,9 +458,10 @@
       ],
       "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
       "designates_type": true,
-      "owner": "Root",
+      "owner": "NamedThing",
       "domain_of": [
-        "Root"
+        "AnonymousThing",
+        "NamedThing"
       ],
       "range": "uriorcurie",
       "required": true,
@@ -577,22 +578,19 @@
   ],
   "classes": [
     {
-      "name": "Root",
-      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Root",
+      "name": "NmdcClass",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/NmdcClass",
       "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
       "abstract": true,
-      "slots": [
-        "type"
-      ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Root",
+      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/NmdcClass",
       "@type": "ClassDefinition"
     },
     {
       "name": "AnonymousThing",
       "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/AnonymousThing",
       "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "is_a": "Root",
+      "is_a": "NmdcClass",
       "abstract": true,
       "slots": [
         "type"
@@ -609,13 +607,13 @@
       "mappings": [
         "schema:Thing"
       ],
-      "is_a": "Root",
+      "is_a": "NmdcClass",
       "abstract": true,
       "slots": [
-        "type",
         "id",
         "name",
-        "description"
+        "description",
+        "type"
       ],
       "slot_usage": {},
       "class_uri": "http://schema.org/Thing",
@@ -630,10 +628,10 @@
       ],
       "is_a": "NamedThing",
       "slots": [
-        "type",
         "id",
         "name",
-        "description"
+        "description",
+        "type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/MaterialOrData",
@@ -648,10 +646,10 @@
       ],
       "is_a": "MaterialOrData",
       "slots": [
-        "type",
         "id",
         "name",
-        "description"
+        "description",
+        "type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/MaterialEntity",
@@ -666,10 +664,10 @@
       ],
       "is_a": "MaterialOrData",
       "slots": [
-        "type",
         "id",
         "name",
-        "description"
+        "description",
+        "type"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/DataEntity",
@@ -679,13 +677,7 @@
       "name": "Database",
       "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Database",
       "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
-      "is_a": "DataEntity",
-      "slots": [
-        "type",
-        "id",
-        "name",
-        "description"
-      ],
+      "is_a": "NmdcClass",
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Database",
       "tree_root": true,
@@ -698,10 +690,10 @@
       "is_a": "NamedThing",
       "abstract": true,
       "slots": [
-        "type",
         "id",
         "name",
         "description",
+        "type",
         "has_inputs",
         "has_outputs"
       ],
@@ -718,10 +710,10 @@
       ],
       "is_a": "PlannedProcess",
       "slots": [
-        "type",
         "id",
         "name",
         "description",
+        "type",
         "MaterialProcessing_has_inputs",
         "MaterialProcessing_has_outputs"
       ],
@@ -738,10 +730,10 @@
       ],
       "is_a": "PlannedProcess",
       "slots": [
-        "type",
         "id",
         "name",
         "description",
+        "type",
         "DataProcessing_has_inputs",
         "DataProcessing_has_outputs"
       ],
@@ -758,10 +750,10 @@
       ],
       "is_a": "PlannedProcess",
       "slots": [
-        "type",
         "id",
         "name",
         "description",
+        "type",
         "DataGeneration_has_inputs",
         "DataGeneration_has_outputs"
       ],
@@ -772,9 +764,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "monterey_schema.yaml",
-  "source_file_date": "2023-10-12T00:32:56",
-  "source_file_size": 4177,
-  "generation_date": "2023-10-12T00:33:01",
+  "source_file_date": "2023-10-12T00:47:25",
+  "source_file_size": 4212,
+  "generation_date": "2023-10-12T00:47:33",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/monterey_schema.context.jsonld",
