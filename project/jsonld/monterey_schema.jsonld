@@ -344,6 +344,24 @@
       "@type": "TypeDefinition"
     }
   ],
+  "enums": [
+    {
+      "name": "GeneralCategories",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/GeneralCategories",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "permissible_values": [
+        {
+          "text": "red"
+        },
+        {
+          "text": "green"
+        },
+        {
+          "text": "blue"
+        }
+      ]
+    }
+  ],
   "slots": [
     {
       "name": "has_inputs",
@@ -371,6 +389,7 @@
         "PlannedProcess"
       ],
       "range": "MaterialOrData",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -468,6 +487,74 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "category",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/category",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/category",
+      "owner": "NamedThing",
+      "domain_of": [
+        "AnonymousThing",
+        "NamedThing"
+      ],
+      "range": "GeneralCategories",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "url",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/url",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/url",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "used",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/used",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "domain": "PlannedProcess",
+      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/used",
+      "owner": "used",
+      "domain_of": [
+        "MaterialProcessing",
+        "DataGeneration"
+      ],
+      "range": "Instrument",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "followed",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/followed",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "domain": "PlannedProcess",
+      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/followed",
+      "owner": "followed",
+      "domain_of": [
+        "MaterialProcessing",
+        "DataGeneration"
+      ],
+      "range": "Protocol",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "orcid",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/orcid",
+      "description": "An identifier of a Person who participates in investigations",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "see_also": [
+        "https://orcid.org/"
+      ],
+      "slot_uri": "https://w3id.org/microbiomedata/monterey-schema/orcid",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "uriorcurie",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "MaterialProcessing_has_inputs",
       "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/has_inputs",
       "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
@@ -501,6 +588,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_outputs",
       "range": "MaterialEntity",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -537,6 +625,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_outputs",
       "range": "DataEntity",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -573,6 +662,7 @@
       "is_usage_slot": true,
       "usage_slot_name": "has_outputs",
       "range": "DataEntity",
+      "required": true,
       "@type": "SlotDefinition"
     }
   ],
@@ -593,7 +683,8 @@
       "is_a": "NmdcClass",
       "abstract": true,
       "slots": [
-        "type"
+        "type",
+        "category"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/AnonymousThing",
@@ -613,7 +704,8 @@
         "id",
         "name",
         "description",
-        "type"
+        "type",
+        "category"
       ],
       "slot_usage": {},
       "class_uri": "http://schema.org/Thing",
@@ -627,11 +719,13 @@
         "monterey_schema:MaterialOrData"
       ],
       "is_a": "NamedThing",
+      "abstract": true,
       "slots": [
         "id",
         "name",
         "description",
-        "type"
+        "type",
+        "category"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/MaterialOrData",
@@ -649,7 +743,8 @@
         "id",
         "name",
         "description",
-        "type"
+        "type",
+        "category"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/MaterialEntity",
@@ -667,7 +762,8 @@
         "id",
         "name",
         "description",
-        "type"
+        "type",
+        "category"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/DataEntity",
@@ -694,11 +790,33 @@
         "name",
         "description",
         "type",
+        "category",
         "has_inputs",
         "has_outputs"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/PlannedProcess",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Investigation",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Investigation",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "mappings": [
+        "monterey_schema:Investigation"
+      ],
+      "is_a": "PlannedProcess",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "type",
+        "category",
+        "has_inputs",
+        "has_outputs"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Investigation",
       "@type": "ClassDefinition"
     },
     {
@@ -714,6 +832,9 @@
         "name",
         "description",
         "type",
+        "category",
+        "used",
+        "followed",
         "MaterialProcessing_has_inputs",
         "MaterialProcessing_has_outputs"
       ],
@@ -734,6 +855,7 @@
         "name",
         "description",
         "type",
+        "category",
         "DataProcessing_has_inputs",
         "DataProcessing_has_outputs"
       ],
@@ -754,19 +876,71 @@
         "name",
         "description",
         "type",
+        "category",
+        "used",
+        "followed",
         "DataGeneration_has_inputs",
         "DataGeneration_has_outputs"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/microbiomedata/monterey-schema/DataGeneration",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "Person",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Person",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "is_a": "MaterialEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "type",
+        "category",
+        "orcid"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Person",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Instrument",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Instrument",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "is_a": "MaterialEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "type",
+        "category"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Instrument",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Protocol",
+      "definition_uri": "https://w3id.org/microbiomedata/monterey-schema/Protocol",
+      "from_schema": "https://w3id.org/microbiomedata/monterey-schema",
+      "is_a": "DataEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "type",
+        "category"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/microbiomedata/monterey-schema/Protocol",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "monterey_schema.yaml",
-  "source_file_date": "2023-10-12T00:47:25",
-  "source_file_size": 4212,
-  "generation_date": "2023-10-12T00:47:33",
+  "source_file_date": "2023-10-12T01:05:41",
+  "source_file_size": 5085,
+  "generation_date": "2023-10-12T01:08:55",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/monterey_schema.context.jsonld",

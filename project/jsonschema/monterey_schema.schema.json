@@ -4,6 +4,9 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -26,7 +29,8 @@
             },
             "required": [
                 "id",
-                "type"
+                "type",
+                "category"
             ],
             "title": "DataEntity",
             "type": "object"
@@ -35,8 +39,14 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "followed": {
                     "type": "string"
                 },
                 "has_inputs": {
@@ -65,11 +75,16 @@
                         "monterey_schema:DataGeneration"
                     ],
                     "type": "string"
+                },
+                "used": {
+                    "type": "string"
                 }
             },
             "required": [
+                "has_outputs",
                 "id",
-                "type"
+                "type",
+                "category"
             ],
             "title": "DataGeneration",
             "type": "object"
@@ -78,6 +93,9 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -111,8 +129,10 @@
                 }
             },
             "required": [
+                "has_outputs",
                 "id",
-                "type"
+                "type",
+                "category"
             ],
             "title": "DataProcessing",
             "type": "object"
@@ -123,10 +143,106 @@
             "title": "Database",
             "type": "object"
         },
+        "GeneralCategories": {
+            "description": "",
+            "enum": [
+                "red",
+                "green",
+                "blue"
+            ],
+            "title": "GeneralCategories",
+            "type": "string"
+        },
+        "Instrument": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:Instrument"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "Instrument",
+            "type": "object"
+        },
+        "Investigation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "has_inputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_outputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:Investigation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "has_outputs",
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "Investigation",
+            "type": "object"
+        },
         "MaterialEntity": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -149,48 +265,24 @@
             },
             "required": [
                 "id",
-                "type"
+                "type",
+                "category"
             ],
             "title": "MaterialEntity",
-            "type": "object"
-        },
-        "MaterialOrData": {
-            "additionalProperties": false,
-            "description": "",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of a thing",
-                    "enum": [
-                        "monterey_schema:MaterialOrData"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "type"
-            ],
-            "title": "MaterialOrData",
             "type": "object"
         },
         "MaterialProcessing": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "followed": {
                     "type": "string"
                 },
                 "has_inputs": {
@@ -219,13 +311,93 @@
                         "monterey_schema:MaterialProcessing"
                     ],
                     "type": "string"
+                },
+                "used": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "has_outputs",
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "MaterialProcessing",
+            "type": "object"
+        },
+        "Person": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "orcid": {
+                    "description": "An identifier of a Person who participates in investigations",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:Person"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "orcid",
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "Person",
+            "type": "object"
+        },
+        "Protocol": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "$ref": "#/$defs/GeneralCategories"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:Protocol"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
                 "id",
-                "type"
+                "type",
+                "category"
             ],
-            "title": "MaterialProcessing",
+            "title": "Protocol",
             "type": "object"
         }
     },

@@ -46,7 +46,8 @@ linkml:Sparqlpath xsd:string
 <AnonymousThing> {
     (  $<AnonymousThing_tes> (  &<NmdcClass_tes> ;
           rdf:type [ <NmdcClass> ] ? ;
-          rdf:type @linkml:Uriorcurie
+          rdf:type @linkml:Uriorcurie ;
+          <category> @<GeneralCategories>
        ) ;
        rdf:type [ <AnonymousThing> ] ?
     )
@@ -60,19 +61,23 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<DataEntity> CLOSED {
-    (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
-          rdf:type [ <MaterialOrData> ] ?
-       ) ;
-       rdf:type [ <DataEntity> ]
-    )
-}
+<DataEntity>  (
+    CLOSED {
+       (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
+             rdf:type [ <MaterialOrData> ] ?
+          ) ;
+          rdf:type [ <DataEntity> ]
+       )
+    } OR @<Protocol>
+)
 
 <DataGeneration> CLOSED {
     (  $<DataGeneration_tes> (  &<PlannedProcess_tes> ;
           rdf:type [ <PlannedProcess> ] ? ;
+          <used> @<Instrument> ? ;
+          <followed> @<Protocol> ? ;
           <has_inputs> @<MaterialEntity> * ;
-          <has_outputs> @<DataEntity> *
+          <has_outputs> @<DataEntity> +
        ) ;
        rdf:type [ <DataGeneration> ]
     )
@@ -82,35 +87,57 @@ linkml:Sparqlpath xsd:string
     (  $<DataProcessing_tes> (  &<PlannedProcess_tes> ;
           rdf:type [ <PlannedProcess> ] ? ;
           <has_inputs> @<DataEntity> * ;
-          <has_outputs> @<DataEntity> *
+          <has_outputs> @<DataEntity> +
        ) ;
        rdf:type [ <DataProcessing> ]
     )
 }
 
-<MaterialEntity> CLOSED {
-    (  $<MaterialEntity_tes> (  &<MaterialOrData_tes> ;
-          rdf:type [ <MaterialOrData> ] ?
+<Instrument> CLOSED {
+    (  $<Instrument_tes> (  &<MaterialEntity_tes> ;
+          rdf:type [ <MaterialEntity> ] ?
        ) ;
-       rdf:type [ <MaterialEntity> ]
+       rdf:type [ <Instrument> ]
     )
 }
 
-<MaterialOrData>  (
+<Investigation> CLOSED {
+    (  $<Investigation_tes> (  &<PlannedProcess_tes> ;
+          rdf:type [ <PlannedProcess> ] ?
+       ) ;
+       rdf:type [ <Investigation> ]
+    )
+}
+
+<MaterialEntity>  (
     CLOSED {
-       (  $<MaterialOrData_tes> (  &<NamedThing_tes> ;
-             rdf:type [ schema1:Thing ] ?
+       (  $<MaterialEntity_tes> (  &<MaterialOrData_tes> ;
+             rdf:type [ <MaterialOrData> ] ?
           ) ;
-          rdf:type [ <MaterialOrData> ]
+          rdf:type [ <MaterialEntity> ]
        )
-    } OR @<DataEntity> OR @<MaterialEntity>
+    } OR @<Instrument> OR @<Person>
 )
+
+<MaterialOrData>  (
+    @<DataEntity> OR @<MaterialEntity>
+)
+
+<MaterialOrData_struct> {
+    (  $<MaterialOrData_tes> (  &<NamedThing_tes> ;
+          rdf:type [ schema1:Thing ] ?
+       ) ;
+       rdf:type [ <MaterialOrData> ]
+    )
+}
 
 <MaterialProcessing> CLOSED {
     (  $<MaterialProcessing_tes> (  &<PlannedProcess_tes> ;
           rdf:type [ <PlannedProcess> ] ? ;
+          <used> @<Instrument> ? ;
+          <followed> @<Protocol> ? ;
           <has_inputs> @<MaterialEntity> * ;
-          <has_outputs> @<MaterialEntity> *
+          <has_outputs> @<MaterialEntity> +
        ) ;
        rdf:type [ <MaterialProcessing> ]
     )
@@ -125,7 +152,8 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <NmdcClass> ] ? ;
           schema1:name @linkml:String ? ;
           schema1:description @linkml:String ? ;
-          rdf:type @linkml:Uriorcurie
+          rdf:type @linkml:Uriorcurie ;
+          <category> @<GeneralCategories>
        ) ;
        rdf:type [ schema1:Thing ]
     )
@@ -141,17 +169,34 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Person> CLOSED {
+    (  $<Person_tes> (  &<MaterialEntity_tes> ;
+          rdf:type [ <MaterialEntity> ] ? ;
+          <orcid> @linkml:Uriorcurie
+       ) ;
+       rdf:type [ <Person> ]
+    )
+}
+
 <PlannedProcess>  (
-    @<DataGeneration> OR @<DataProcessing> OR @<MaterialProcessing>
+    @<DataGeneration> OR @<DataProcessing> OR @<Investigation> OR @<MaterialProcessing>
 )
 
 <PlannedProcess_struct> {
     (  $<PlannedProcess_tes> (  &<NamedThing_tes> ;
           rdf:type [ schema1:Thing ] ? ;
           <has_inputs> @<MaterialOrData> * ;
-          <has_outputs> @<MaterialOrData> *
+          <has_outputs> @<MaterialOrData> +
        ) ;
        rdf:type [ <PlannedProcess> ]
+    )
+}
+
+<Protocol> CLOSED {
+    (  $<Protocol_tes> (  &<DataEntity_tes> ;
+          rdf:type [ <DataEntity> ] ?
+       ) ;
+       rdf:type [ <Protocol> ]
     )
 }
 

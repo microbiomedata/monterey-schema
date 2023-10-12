@@ -2,6 +2,7 @@
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix monterey_schema: <https://w3id.org/microbiomedata/monterey-schema/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -13,10 +14,29 @@ monterey_schema:AnonymousThing a owl:Class,
     rdfs:subClassOf monterey_schema:NmdcClass ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
+monterey_schema:Person a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Person" ;
+    rdfs:subClassOf monterey_schema:MaterialEntity ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:category a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "category" ;
+    rdfs:range monterey_schema:GeneralCategories ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
 monterey_schema:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "description" ;
     skos:definition "A human-readable description for a thing" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:followed a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "followed" ;
+    rdfs:domain monterey_schema:PlannedProcess ;
+    rdfs:range monterey_schema:Protocol ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:id a owl:ObjectProperty,
@@ -30,6 +50,14 @@ monterey_schema:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
     skos:definition "A human-readable name for a thing" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:orcid a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "orcid" ;
+    rdfs:range linkml:Uriorcurie ;
+    rdfs:seeAlso <https://orcid.org/> ;
+    skos:definition "An identifier of a Person who participates in investigations" ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:process_collection a owl:ObjectProperty,
@@ -46,17 +74,29 @@ monterey_schema:type a owl:ObjectProperty,
     skos:definition "The type of a thing" ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
+monterey_schema:url a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "url" ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:used a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "used" ;
+    rdfs:domain monterey_schema:PlannedProcess ;
+    rdfs:range monterey_schema:Instrument ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
 monterey_schema:DataGeneration a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "DataGeneration" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom monterey_schema:DataEntity ;
             owl:onProperty monterey_schema:has_outputs ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty monterey_schema:has_inputs ],
         [ a owl:Restriction ;
-            owl:allValuesFrom monterey_schema:DataEntity ;
+            owl:minCardinality 1 ;
             owl:onProperty monterey_schema:has_outputs ],
         [ a owl:Restriction ;
             owl:allValuesFrom monterey_schema:MaterialEntity ;
@@ -72,14 +112,14 @@ monterey_schema:DataProcessing a owl:Class,
             owl:minCardinality 0 ;
             owl:onProperty monterey_schema:has_inputs ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom monterey_schema:DataEntity ;
+            owl:onProperty monterey_schema:has_outputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty monterey_schema:has_outputs ],
         [ a owl:Restriction ;
             owl:allValuesFrom monterey_schema:DataEntity ;
             owl:onProperty monterey_schema:has_inputs ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom monterey_schema:DataEntity ;
-            owl:onProperty monterey_schema:has_outputs ],
         monterey_schema:PlannedProcess ;
     skos:exactMatch monterey_schema:DataProcessing ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
@@ -90,23 +130,42 @@ monterey_schema:Database a owl:Class,
     rdfs:subClassOf monterey_schema:NmdcClass ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
+monterey_schema:Instrument a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Instrument" ;
+    rdfs:subClassOf monterey_schema:MaterialEntity ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:Investigation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Investigation" ;
+    rdfs:subClassOf monterey_schema:PlannedProcess ;
+    skos:exactMatch monterey_schema:Investigation ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
 monterey_schema:MaterialProcessing a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "MaterialProcessing" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty monterey_schema:has_inputs ],
-        [ a owl:Restriction ;
             owl:allValuesFrom monterey_schema:MaterialEntity ;
             owl:onProperty monterey_schema:has_inputs ],
         [ a owl:Restriction ;
             owl:allValuesFrom monterey_schema:MaterialEntity ;
             owl:onProperty monterey_schema:has_outputs ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:minCardinality 1 ;
             owl:onProperty monterey_schema:has_outputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty monterey_schema:has_inputs ],
         monterey_schema:PlannedProcess ;
     skos:exactMatch monterey_schema:MaterialProcessing ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:Protocol a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Protocol" ;
+    rdfs:subClassOf monterey_schema:DataEntity ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:object_collection a owl:ObjectProperty,
@@ -115,6 +174,18 @@ monterey_schema:object_collection a owl:ObjectProperty,
     rdfs:domain monterey_schema:Database ;
     rdfs:range monterey_schema:NamedThing ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+<https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#blue> a owl:Class,
+        monterey_schema:GeneralCategories ;
+    rdfs:label "blue" .
+
+<https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#green> a owl:Class,
+        monterey_schema:GeneralCategories ;
+    rdfs:label "green" .
+
+<https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#red> a owl:Class,
+        monterey_schema:GeneralCategories ;
+    rdfs:label "red" .
 
 monterey_schema:NamedThing a owl:Class,
         linkml:ClassDefinition ;
@@ -129,18 +200,18 @@ monterey_schema:NmdcClass a owl:Class,
     rdfs:label "NmdcClass" ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
+monterey_schema:GeneralCategories a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#red> <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#green> <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#blue> ) ;
+    linkml:permissible_values <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#blue>,
+        <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#green>,
+        <https://w3id.org/microbiomedata/monterey-schema/GeneralCategories#red> .
+
 monterey_schema:DataEntity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "DataEntity" ;
     rdfs:subClassOf monterey_schema:MaterialOrData ;
     skos:exactMatch monterey_schema:DataEntity ;
-    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
-
-monterey_schema:MaterialEntity a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "MaterialEntity" ;
-    rdfs:subClassOf monterey_schema:MaterialOrData ;
-    skos:exactMatch monterey_schema:MaterialEntity ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:MaterialOrData a owl:Class,
@@ -150,10 +221,11 @@ monterey_schema:MaterialOrData a owl:Class,
     skos:exactMatch monterey_schema:MaterialOrData ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
-monterey_schema:PlannedProcess a owl:Class,
+monterey_schema:MaterialEntity a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "PlannedProcess" ;
-    rdfs:subClassOf monterey_schema:NamedThing ;
+    rdfs:label "MaterialEntity" ;
+    rdfs:subClassOf monterey_schema:MaterialOrData ;
+    skos:exactMatch monterey_schema:MaterialEntity ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 monterey_schema:has_inputs a owl:ObjectProperty,
@@ -168,6 +240,12 @@ monterey_schema:has_outputs a owl:ObjectProperty,
     rdfs:label "has_outputs" ;
     rdfs:domain monterey_schema:PlannedProcess ;
     rdfs:range monterey_schema:MaterialOrData ;
+    skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
+
+monterey_schema:PlannedProcess a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "PlannedProcess" ;
+    rdfs:subClassOf monterey_schema:NamedThing ;
     skos:inScheme <https://w3id.org/microbiomedata/monterey-schema> .
 
 <https://w3id.org/microbiomedata/monterey-schema> a owl:Ontology ;
