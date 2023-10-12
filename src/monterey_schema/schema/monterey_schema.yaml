@@ -10,11 +10,11 @@ see_also:
 prefixes:
   monterey_schema: https://w3id.org/microbiomedata/monterey-schema/
   linkml: https://w3id.org/linkml/
-  #  biolink: https://w3id.org/biolink/
-  schema: http://schema.org/
   #  PATO: http://purl.obolibrary.org/obo/PATO_
-  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  #  biolink: https://w3id.org/biolink/
   example: https://example.org/ # linter warning  Schema maps prefix 'example' to namespace 'https://example.org/' instead of namespace 'http://www.example.org/rdf#'  (canonical_prefixes)
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  schema: http://schema.org/
 default_prefix: monterey_schema
 default_range: string
 
@@ -72,6 +72,11 @@ classes:
     is_a: MaterialOrData
     class_uri: monterey_schema:MaterialEntity
 
+  Site:
+    is_a: MaterialEntity
+    slots:
+      - depth
+
   DataEntity:
     is_a: MaterialOrData
     class_uri: monterey_schema:DataEntity
@@ -93,10 +98,15 @@ classes:
       - duration
 
   Investigation:
+    aliases:
+      - Study
     is_a: PlannedProcess
     class_uri: monterey_schema:Investigation
 
   MaterialProcessing:
+    aliases:
+      - BiosampleProcessing
+      - SampleOperations
     is_a: PlannedProcess
     class_uri: monterey_schema:MaterialProcessing
     slot_usage:
@@ -107,6 +117,24 @@ classes:
     slots:
       - used
       - followed
+
+  Sieving:
+    is_a: MaterialProcessing
+
+  Extraction:
+    is_a: MaterialProcessing
+
+  Derivatization:
+    is_a: MaterialProcessing
+
+  SampleCollection:
+    is_a: MaterialProcessing
+    class_uri: monterey_schema:SampleCollection
+    slot_usage:
+      has_inputs:
+        range: Site
+      has_outputs:
+        range: MaterialEntity
 
   DataProcessing:
     is_a: PlannedProcess
@@ -131,14 +159,17 @@ classes:
 
   Person:
     is_a: MaterialEntity
+    class_uri: monterey_schema:Person
     slots:
       - orcid
 
   Instrument:
     is_a: MaterialEntity
+    class_uri: monterey_schema:Instrument
 
   Protocol:
     is_a: DataEntity
+    class_uri: monterey_schema:Protocol
 
 
 #  Person:
@@ -222,15 +253,23 @@ slots:
     range: Protocol
 
   orcid:
+    domain: Person
     range: uriorcurie
     description: An identifier of a Person who participates in investigations
     see_also:
       - https://orcid.org/
     required: true
 
-  has_raw_value: { }
-  has_unit: { }
+  has_raw_value:
+    domain: AttributeValue
+    range: string
+    required: true
+  has_unit:
+    domain: AttributeValue
+    range: string
   has_numeric_value:
+    domain: QuantityValue
+    range: float
     todos:
       - set the range to anyOf integer or float?
     required: true
@@ -240,12 +279,19 @@ slots:
     is_a: has_numeric_value
 
   speed:
+    domain: PlannedProcess
     range: QuantityValue
 
   temperature:
+    domain: PlannedProcess
     range: QuantityValue
 
   duration:
+    domain: PlannedProcess
+    range: QuantityValue
+
+  depth:
+    domain: Site
     range: QuantityValue
 
 #  primary_email:
