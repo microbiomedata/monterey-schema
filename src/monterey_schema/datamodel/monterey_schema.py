@@ -1,5 +1,5 @@
 # Auto generated from monterey_schema.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-11T15:00:18
+# Generation date: 2023-10-12T00:33:04
 # Schema: monterey-schema
 #
 # id: https://w3id.org/microbiomedata/monterey-schema
@@ -34,6 +34,7 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 MONTEREY_SCHEMA = CurieNamespace('monterey_schema', 'https://w3id.org/microbiomedata/monterey-schema/')
+RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 DEFAULT_ = MONTEREY_SCHEMA
 
@@ -57,10 +58,27 @@ class DataEntityId(MaterialOrDataId):
     pass
 
 
+class DatabaseId(DataEntityId):
+    pass
+
+
 class PlannedProcessId(NamedThingId):
     pass
 
 
+class MaterialProcessingId(PlannedProcessId):
+    pass
+
+
+class DataProcessingId(PlannedProcessId):
+    pass
+
+
+class DataGenerationId(PlannedProcessId):
+    pass
+
+
+@dataclass
 class Root(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -69,7 +87,42 @@ class Root(YAMLRoot):
     class_name: ClassVar[str] = "Root"
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Root
 
+    type: Union[str, URIorCURIE] = None
 
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+        super().__post_init__(**kwargs)
+
+
+    def __new__(cls, *args, **kwargs):
+
+        type_designator = "type"
+        if not type_designator in kwargs:
+            return super().__new__(cls,*args,**kwargs)
+        else:
+            type_designator_value = kwargs[type_designator]
+            target_cls = cls._class_for("class_class_curie", type_designator_value)
+
+
+            if target_cls is None:
+                target_cls = cls._class_for("class_class_uri", type_designator_value)
+
+
+            if target_cls is None:
+                target_cls = cls._class_for("class_model_uri", type_designator_value)
+
+
+            if target_cls is None:
+                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
+                                 f"has no subclass with ['class_class_curie', 'class_class_uri', 'class_model_uri']='{kwargs[type_designator]}'")
+            return super().__new__(target_cls,*args,**kwargs)
+
+
+
+@dataclass
 class AnonymousThing(Root):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -77,6 +130,15 @@ class AnonymousThing(Root):
     class_class_curie: ClassVar[str] = "monterey_schema:AnonymousThing"
     class_name: ClassVar[str] = "AnonymousThing"
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
+
+    type: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -92,6 +154,7 @@ class NamedThing(Root):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.NamedThing
 
     id: Union[str, NamedThingId] = None
+    type: Union[str, URIorCURIE] = None
     name: Optional[str] = None
     description: Optional[str] = None
 
@@ -108,6 +171,9 @@ class NamedThing(Root):
             self.description = str(self.description)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -120,6 +186,7 @@ class MaterialOrData(NamedThing):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.MaterialOrData
 
     id: Union[str, MaterialOrDataId] = None
+    type: Union[str, URIorCURIE] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -128,6 +195,9 @@ class MaterialOrData(NamedThing):
             self.id = MaterialOrDataId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -140,6 +210,7 @@ class MaterialEntity(MaterialOrData):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.MaterialEntity
 
     id: Union[str, MaterialEntityId] = None
+    type: Union[str, URIorCURIE] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -148,6 +219,9 @@ class MaterialEntity(MaterialOrData):
             self.id = MaterialEntityId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -160,6 +234,7 @@ class DataEntity(MaterialOrData):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.DataEntity
 
     id: Union[str, DataEntityId] = None
+    type: Union[str, URIorCURIE] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -168,6 +243,33 @@ class DataEntity(MaterialOrData):
             self.id = DataEntityId(self.id)
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class Database(DataEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Database
+    class_class_curie: ClassVar[str] = "monterey_schema:Database"
+    class_name: ClassVar[str] = "Database"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Database
+
+    id: Union[str, DatabaseId] = None
+    type: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DatabaseId):
+            self.id = DatabaseId(self.id)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 @dataclass
@@ -180,15 +282,11 @@ class PlannedProcess(NamedThing):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.PlannedProcess
 
     id: Union[str, PlannedProcessId] = None
+    type: Union[str, URIorCURIE] = None
     has_inputs: Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]] = empty_list()
     has_outputs: Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PlannedProcessId):
-            self.id = PlannedProcessId(self.id)
-
         if not isinstance(self.has_inputs, list):
             self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
         self.has_inputs = [v if isinstance(v, MaterialOrDataId) else MaterialOrDataId(v) for v in self.has_inputs]
@@ -198,6 +296,111 @@ class PlannedProcess(NamedThing):
         self.has_outputs = [v if isinstance(v, MaterialOrDataId) else MaterialOrDataId(v) for v in self.has_outputs]
 
         super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class MaterialProcessing(PlannedProcess):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.MaterialProcessing
+    class_class_curie: ClassVar[str] = "monterey_schema:MaterialProcessing"
+    class_name: ClassVar[str] = "MaterialProcessing"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.MaterialProcessing
+
+    id: Union[str, MaterialProcessingId] = None
+    type: Union[str, URIorCURIE] = None
+    has_inputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
+    has_outputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MaterialProcessingId):
+            self.id = MaterialProcessingId(self.id)
+
+        if not isinstance(self.has_inputs, list):
+            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
+        self.has_inputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_inputs]
+
+        if not isinstance(self.has_outputs, list):
+            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
+        self.has_outputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_outputs]
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class DataProcessing(PlannedProcess):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.DataProcessing
+    class_class_curie: ClassVar[str] = "monterey_schema:DataProcessing"
+    class_name: ClassVar[str] = "DataProcessing"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.DataProcessing
+
+    id: Union[str, DataProcessingId] = None
+    type: Union[str, URIorCURIE] = None
+    has_inputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
+    has_outputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DataProcessingId):
+            self.id = DataProcessingId(self.id)
+
+        if not isinstance(self.has_inputs, list):
+            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
+        self.has_inputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_inputs]
+
+        if not isinstance(self.has_outputs, list):
+            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
+        self.has_outputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_outputs]
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class DataGeneration(PlannedProcess):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.DataGeneration
+    class_class_curie: ClassVar[str] = "monterey_schema:DataGeneration"
+    class_name: ClassVar[str] = "DataGeneration"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.DataGeneration
+
+    id: Union[str, DataGenerationId] = None
+    type: Union[str, URIorCURIE] = None
+    has_inputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
+    has_outputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DataGenerationId):
+            self.id = DataGenerationId(self.id)
+
+        if not isinstance(self.has_inputs, list):
+            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
+        self.has_inputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_inputs]
+
+        if not isinstance(self.has_outputs, list):
+            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
+        self.has_outputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_outputs]
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
 
 
 # Enumerations
@@ -221,3 +424,30 @@ slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
 
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=MONTEREY_SCHEMA.description, domain=None, range=Optional[str])
+
+slots.object_collection = Slot(uri=MONTEREY_SCHEMA.object_collection, name="object_collection", curie=MONTEREY_SCHEMA.curie('object_collection'),
+                   model_uri=MONTEREY_SCHEMA.object_collection, domain=Database, range=Optional[Union[str, NamedThingId]])
+
+slots.process_collection = Slot(uri=MONTEREY_SCHEMA.process_collection, name="process_collection", curie=MONTEREY_SCHEMA.curie('process_collection'),
+                   model_uri=MONTEREY_SCHEMA.process_collection, domain=Database, range=Optional[Union[Dict[Union[str, PlannedProcessId], Union[dict, "PlannedProcess"]], List[Union[dict, "PlannedProcess"]]]])
+
+slots.type = Slot(uri=RDF.type, name="type", curie=RDF.curie('type'),
+                   model_uri=MONTEREY_SCHEMA.type, domain=None, range=Union[str, URIorCURIE])
+
+slots.MaterialProcessing_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="MaterialProcessing_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
+                   model_uri=MONTEREY_SCHEMA.MaterialProcessing_has_inputs, domain=MaterialProcessing, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
+
+slots.MaterialProcessing_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="MaterialProcessing_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
+                   model_uri=MONTEREY_SCHEMA.MaterialProcessing_has_outputs, domain=MaterialProcessing, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
+
+slots.DataProcessing_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="DataProcessing_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
+                   model_uri=MONTEREY_SCHEMA.DataProcessing_has_inputs, domain=DataProcessing, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])
+
+slots.DataProcessing_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="DataProcessing_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
+                   model_uri=MONTEREY_SCHEMA.DataProcessing_has_outputs, domain=DataProcessing, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])
+
+slots.DataGeneration_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="DataGeneration_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
+                   model_uri=MONTEREY_SCHEMA.DataGeneration_has_inputs, domain=DataGeneration, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
+
+slots.DataGeneration_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="DataGeneration_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
+                   model_uri=MONTEREY_SCHEMA.DataGeneration_has_outputs, domain=DataGeneration, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])

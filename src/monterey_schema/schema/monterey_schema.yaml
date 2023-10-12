@@ -13,6 +13,7 @@ prefixes:
   #  biolink: https://w3id.org/biolink/
   schema: http://schema.org/
   #  PATO: http://purl.obolibrary.org/obo/PATO_
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   example: https://example.org/ # warning  Schema maps prefix 'example' to namespace 'https://example.org/' instead of namespace 'http://www.example.org/rdf#'  (canonical_prefixes)
 default_prefix: monterey_schema
 default_range: string
@@ -24,12 +25,15 @@ classes:
 
   Root:
     abstract: true
+    slots:
+      - type
 
   AnonymousThing:
     is_a: Root
     abstract: true
 
   NamedThing:
+    abstract: true
     is_a: Root
     description: >-
       A generic grouping for any identifiable entity
@@ -41,18 +45,53 @@ classes:
 
   MaterialOrData:
     is_a: NamedThing
+    class_uri: monterey_schema:MaterialOrData
 
   MaterialEntity:
     is_a: MaterialOrData
+    class_uri: monterey_schema:MaterialEntity
 
   DataEntity:
     is_a: MaterialOrData
+    class_uri: monterey_schema:DataEntity
+
+  Database:
+    is_a: DataEntity
+    tree_root: true
 
   PlannedProcess:
     is_a: NamedThing
+    abstract: true
     slots:
       - has_inputs
       - has_outputs
+
+  MaterialProcessing:
+    is_a: PlannedProcess
+    class_uri: monterey_schema:MaterialProcessing
+    slot_usage:
+      has_inputs:
+        range: MaterialEntity
+      has_outputs:
+        range: MaterialEntity
+
+  DataProcessing:
+    is_a: PlannedProcess
+    class_uri: monterey_schema:DataProcessing
+    slot_usage:
+      has_inputs:
+        range: DataEntity
+      has_outputs:
+        range: DataEntity
+
+  DataGeneration:
+    is_a: PlannedProcess
+    class_uri: monterey_schema:DataGeneration
+    slot_usage:
+      has_inputs:
+        range: MaterialEntity
+      has_outputs:
+        range: DataEntity
 
 
 #  Person:
@@ -100,6 +139,25 @@ slots:
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
+
+  object_collection:
+    domain: Database
+    range: NamedThing
+    abstract: true
+
+  process_collection:
+    is_a: object_collection
+    multivalued: true
+    inlined_as_list: true
+    range: PlannedProcess
+
+  type:
+    slot_uri: rdf:type
+    range: uriorcurie
+    designates_type: true
+    description: The type of a thing
+    required: true
+
 #  primary_email:
 #    slot_uri: schema:email
 #    description: The main email address of a person

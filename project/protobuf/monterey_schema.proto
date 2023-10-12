@@ -1,33 +1,55 @@
-message DataEntity
+message Database
  {
+  uriorcurie type = 0
   uriorcurie id = 0
   string name = 0
   string description = 0
  }
+message DataEntity
+ {
+  uriorcurie type = 0
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
+message DataGeneration
+ {
+  uriorcurie type = 0
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  materialEntity hasInputs = 0
+ repeated  dataEntity hasOutputs = 0
+ }
+message DataProcessing
+ {
+  uriorcurie type = 0
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  dataEntity hasInputs = 0
+ repeated  dataEntity hasOutputs = 0
+ }
 message MaterialEntity
  {
+  uriorcurie type = 0
   uriorcurie id = 0
   string name = 0
   string description = 0
  }
 message MaterialOrData
  {
+  uriorcurie type = 0
   uriorcurie id = 0
   string name = 0
   string description = 0
  }
-// A generic grouping for any identifiable entity
-message NamedThing
+message MaterialProcessing
  {
+  uriorcurie type = 0
   uriorcurie id = 0
   string name = 0
   string description = 0
- }
-message PlannedProcess
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  materialOrData hasInputs = 0
- repeated  materialOrData hasOutputs = 0
+ repeated  materialEntity hasInputs = 0
+ repeated  materialEntity hasOutputs = 0
  }
