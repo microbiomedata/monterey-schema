@@ -211,6 +211,10 @@
 
       Investigation : description
 
+      Investigation : duration
+
+          Investigation --|&gt; QuantityValue : duration
+
       Investigation : has_inputs
 
           Investigation --|&gt; MaterialOrData : has_inputs
@@ -222,6 +226,14 @@
       Investigation : id
 
       Investigation : name
+
+      Investigation : speed
+
+          Investigation --|&gt; QuantityValue : speed
+
+      Investigation : temperature
+
+          Investigation --|&gt; QuantityValue : temperature
 
       Investigation : type
 
@@ -260,6 +272,24 @@
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
 <td>1..* <br/> <a href="../MaterialOrData/">MaterialOrData</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../speed/">speed</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../temperature/">temperature</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../duration/">duration</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -359,6 +389,33 @@ attributes:
     - PlannedProcess
     range: MaterialOrData
     required: true
+  speed:
+    name: speed
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: speed
+    owner: Investigation
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  temperature:
+    name: temperature
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: temperature
+    owner: Investigation
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  duration:
+    name: duration
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: duration
+    owner: Investigation
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
   id:
     name: id
     description: A unique identifier for a thing

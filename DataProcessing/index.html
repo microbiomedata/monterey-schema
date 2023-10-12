@@ -211,6 +211,10 @@
 
       DataProcessing : description
 
+      DataProcessing : duration
+
+          DataProcessing --|&gt; QuantityValue : duration
+
       DataProcessing : has_inputs
 
           DataProcessing --|&gt; DataEntity : has_inputs
@@ -222,6 +226,14 @@
       DataProcessing : id
 
       DataProcessing : name
+
+      DataProcessing : speed
+
+          DataProcessing --|&gt; QuantityValue : speed
+
+      DataProcessing : temperature
+
+          DataProcessing --|&gt; QuantityValue : temperature
 
       DataProcessing : type
 
@@ -260,6 +272,24 @@
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
 <td>1..* <br/> <a href="../DataEntity/">DataEntity</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../speed/">speed</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../temperature/">temperature</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../duration/">duration</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -381,6 +411,33 @@ attributes:
     - PlannedProcess
     range: DataEntity
     required: true
+  speed:
+    name: speed
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: speed
+    owner: DataProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  temperature:
+    name: temperature
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: temperature
+    owner: DataProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  duration:
+    name: duration
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: duration
+    owner: DataProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
   id:
     name: id
     description: A unique identifier for a thing

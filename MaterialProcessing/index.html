@@ -211,6 +211,10 @@
 
       MaterialProcessing : description
 
+      MaterialProcessing : duration
+
+          MaterialProcessing --|&gt; QuantityValue : duration
+
       MaterialProcessing : followed
 
           MaterialProcessing --|&gt; Protocol : followed
@@ -226,6 +230,14 @@
       MaterialProcessing : id
 
       MaterialProcessing : name
+
+      MaterialProcessing : speed
+
+          MaterialProcessing --|&gt; QuantityValue : speed
+
+      MaterialProcessing : temperature
+
+          MaterialProcessing --|&gt; QuantityValue : temperature
 
       MaterialProcessing : type
 
@@ -280,6 +292,24 @@
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
 <td>1..* <br/> <a href="../MaterialEntity/">MaterialEntity</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../speed/">speed</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../temperature/">temperature</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../duration/">duration</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -426,6 +456,33 @@ attributes:
     - PlannedProcess
     range: MaterialEntity
     required: true
+  speed:
+    name: speed
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: speed
+    owner: MaterialProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  temperature:
+    name: temperature
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: temperature
+    owner: MaterialProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  duration:
+    name: duration
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: duration
+    owner: MaterialProcessing
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
   id:
     name: id
     description: A unique identifier for a thing

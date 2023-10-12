@@ -226,6 +226,10 @@
 
       PlannedProcess : description
 
+      PlannedProcess : duration
+
+          PlannedProcess --|&gt; QuantityValue : duration
+
       PlannedProcess : has_inputs
 
           PlannedProcess --|&gt; MaterialOrData : has_inputs
@@ -237,6 +241,14 @@
       PlannedProcess : id
 
       PlannedProcess : name
+
+      PlannedProcess : speed
+
+          PlannedProcess --|&gt; QuantityValue : speed
+
+      PlannedProcess : temperature
+
+          PlannedProcess --|&gt; QuantityValue : temperature
 
       PlannedProcess : type
 
@@ -278,6 +290,24 @@
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
 <td>1..* <br/> <a href="../MaterialOrData/">MaterialOrData</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../speed/">speed</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../temperature/">temperature</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../duration/">duration</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -445,6 +475,9 @@ abstract: true
 slots:
 - has_inputs
 - has_outputs
+- speed
+- temperature
+- duration
 
 </code></pre>
 </details>
@@ -478,6 +511,33 @@ attributes:
     - PlannedProcess
     range: MaterialOrData
     required: true
+  speed:
+    name: speed
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: speed
+    owner: PlannedProcess
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  temperature:
+    name: temperature
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: temperature
+    owner: PlannedProcess
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
+  duration:
+    name: duration
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: duration
+    owner: PlannedProcess
+    domain_of:
+    - PlannedProcess
+    range: QuantityValue
   id:
     name: id
     description: A unique identifier for a thing
