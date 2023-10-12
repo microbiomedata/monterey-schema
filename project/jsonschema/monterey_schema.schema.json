@@ -120,31 +120,6 @@
         "Database": {
             "additionalProperties": false,
             "description": "",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of a thing",
-                    "enum": [
-                        "monterey_schema:Database"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "type"
-            ],
             "title": "Database",
             "type": "object"
         },
@@ -259,31 +234,6 @@
     "additionalProperties": true,
     "description": "",
     "metamodel_version": "1.7.0",
-    "properties": {
-        "description": {
-            "description": "A human-readable description for a thing",
-            "type": "string"
-        },
-        "id": {
-            "description": "A unique identifier for a thing",
-            "type": "string"
-        },
-        "name": {
-            "description": "A human-readable name for a thing",
-            "type": "string"
-        },
-        "type": {
-            "description": "The type of a thing",
-            "enum": [
-                "monterey_schema:Database"
-            ],
-            "type": "string"
-        }
-    },
-    "required": [
-        "id",
-        "type"
-    ],
     "title": "monterey-schema",
     "type": "object",
     "version": null

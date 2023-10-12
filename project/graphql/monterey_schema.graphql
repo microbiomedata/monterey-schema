@@ -5,86 +5,81 @@ interface AnonymousThing
 
 type Database
   {
-    type: Uriorcurie!
-    id: Uriorcurie!
-    name: String
-    description: String
   }
 
 type DataEntity
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
   }
 
 type DataGeneration
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
     hasInputs: [MaterialEntity]
     hasOutputs: [DataEntity]
   }
 
 type DataProcessing
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
     hasInputs: [DataEntity]
     hasOutputs: [DataEntity]
   }
 
 type MaterialEntity
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
   }
 
 type MaterialOrData
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
   }
 
 type MaterialProcessing
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
     hasInputs: [MaterialEntity]
     hasOutputs: [MaterialEntity]
   }
 
 interface NamedThing
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
+  }
+
+interface NmdcClass
+  {
   }
 
 interface PlannedProcess
   {
-    type: Uriorcurie!
     id: Uriorcurie!
     name: String
     description: String
+    type: Uriorcurie!
     hasInputs: [MaterialOrData]
     hasOutputs: [MaterialOrData]
-  }
-
-interface Root
-  {
-    type: Uriorcurie!
   }
 

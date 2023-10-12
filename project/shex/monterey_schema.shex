@@ -44,30 +44,29 @@ linkml:Jsonpath xsd:string
 linkml:Sparqlpath xsd:string
 
 <AnonymousThing> {
-    (  $<AnonymousThing_tes> (  &<Root_tes> ;
-          rdf:type [ <Root> ] ?
+    (  $<AnonymousThing_tes> (  &<NmdcClass_tes> ;
+          rdf:type [ <NmdcClass> ] ? ;
+          rdf:type @linkml:Uriorcurie
        ) ;
        rdf:type [ <AnonymousThing> ] ?
     )
 }
 
 <Database> CLOSED {
-    (  $<Database_tes> (  &<DataEntity_tes> ;
-          rdf:type [ <DataEntity> ] ?
+    (  $<Database_tes> (  &<NmdcClass_tes> ;
+          rdf:type [ <NmdcClass> ] ?
        ) ;
-       rdf:type [ <Database> ]
+       rdf:type [ <Database> ] ?
     )
 }
 
-<DataEntity>  (
-    CLOSED {
-       (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
-             rdf:type [ <MaterialOrData> ] ?
-          ) ;
-          rdf:type [ <DataEntity> ]
-       )
-    } OR @<Database>
-)
+<DataEntity> CLOSED {
+    (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
+          rdf:type [ <MaterialOrData> ] ?
+       ) ;
+       rdf:type [ <DataEntity> ]
+    )
+}
 
 <DataGeneration> CLOSED {
     (  $<DataGeneration_tes> (  &<PlannedProcess_tes> ;
@@ -122,12 +121,23 @@ linkml:Sparqlpath xsd:string
 )
 
 <NamedThing_struct> {
-    (  $<NamedThing_tes> (  &<Root_tes> ;
-          rdf:type [ <Root> ] ? ;
+    (  $<NamedThing_tes> (  &<NmdcClass_tes> ;
+          rdf:type [ <NmdcClass> ] ? ;
           schema1:name @linkml:String ? ;
-          schema1:description @linkml:String ?
+          schema1:description @linkml:String ? ;
+          rdf:type @linkml:Uriorcurie
        ) ;
        rdf:type [ schema1:Thing ]
+    )
+}
+
+<NmdcClass>  (
+    @<AnonymousThing> OR @<Database> OR @<NamedThing>
+)
+
+<NmdcClass_struct> {
+    (  $<NmdcClass_tes> rdf:type . * ;
+       rdf:type [ <NmdcClass> ] ?
     )
 }
 
@@ -142,16 +152,6 @@ linkml:Sparqlpath xsd:string
           <has_outputs> @<MaterialOrData> *
        ) ;
        rdf:type [ <PlannedProcess> ]
-    )
-}
-
-<Root>  (
-    @<AnonymousThing> OR @<NamedThing>
-)
-
-<Root_struct> {
-    (  $<Root_tes> rdf:type @linkml:Uriorcurie ;
-       rdf:type [ <Root> ] ?
     )
 }
 

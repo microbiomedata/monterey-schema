@@ -14,7 +14,7 @@ prefixes:
   schema: http://schema.org/
   #  PATO: http://purl.obolibrary.org/obo/PATO_
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-  example: https://example.org/ # warning  Schema maps prefix 'example' to namespace 'https://example.org/' instead of namespace 'http://www.example.org/rdf#'  (canonical_prefixes)
+  example: https://example.org/ # linter warning  Schema maps prefix 'example' to namespace 'https://example.org/' instead of namespace 'http://www.example.org/rdf#'  (canonical_prefixes)
 default_prefix: monterey_schema
 default_range: string
 
@@ -23,25 +23,27 @@ imports:
 
 classes:
 
-  Root:
+  NmdcClass:
+    abstract: true
+
+  AnonymousThing:
+    is_a: NmdcClass
     abstract: true
     slots:
       - type
 
-  AnonymousThing:
-    is_a: Root
-    abstract: true
-
   NamedThing:
     abstract: true
-    is_a: Root
+    is_a: NmdcClass
     description: >-
       A generic grouping for any identifiable entity
     slots:
       - id
       - name
       - description
+      - type
     class_uri: schema:Thing
+
 
   MaterialOrData:
     is_a: NamedThing
@@ -56,7 +58,7 @@ classes:
     class_uri: monterey_schema:DataEntity
 
   Database:
-    is_a: DataEntity
+    is_a: NmdcClass
     tree_root: true
 
   PlannedProcess:
