@@ -209,6 +209,8 @@
       Root &lt;|-- AnonymousThing
       Root &lt;|-- NamedThing
 
+      Root : type
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -231,10 +233,10 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="../type/">type</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The type of a thing</td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -269,6 +271,8 @@
 <pre><code class="language-yaml">name: Root
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 abstract: true
+slots:
+- type
 
 </code></pre>
 </details>
@@ -277,6 +281,20 @@ abstract: true
 <pre><code class="language-yaml">name: Root
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 abstract: true
+attributes:
+  type:
+    name: type
+    description: The type of a thing
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: type
+    owner: Root
+    domain_of:
+    - Root
+    range: uriorcurie
+    required: true
 
 </code></pre>
 </details>

@@ -205,10 +205,19 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-plannedprocess">Class: PlannedProcess</h1>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
 <p>URI: <a href="https://w3id.org/microbiomedata/monterey-schema/PlannedProcess">monterey_schema:PlannedProcess</a></p>
 <div class="mermaid"> classDiagram
     class PlannedProcess
       NamedThing &lt;|-- PlannedProcess
+
+
+      PlannedProcess &lt;|-- MaterialProcessing
+      PlannedProcess &lt;|-- DataProcessing
+      PlannedProcess &lt;|-- DataGeneration
+
 
       PlannedProcess : description
 
@@ -224,13 +233,20 @@
 
       PlannedProcess : name
 
+      PlannedProcess : type
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../Root/">Root</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>PlannedProcess</strong></li>
+<li><strong>PlannedProcess</strong><ul>
+<li><a href="../MaterialProcessing/">MaterialProcessing</a></li>
+<li><a href="../DataProcessing/">DataProcessing</a></li>
+<li><a href="../DataGeneration/">DataGeneration</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -277,6 +293,12 @@
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The type of a thing</td>
+<td><a href="../Root/">Root</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -298,6 +320,42 @@
 </tr>
 <tr>
 <td><a href="./">PlannedProcess</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../DataProcessing/">DataProcessing</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../DataProcessing/">DataProcessing</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../DataGeneration/">DataGeneration</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../DataGeneration/">DataGeneration</a></td>
 <td><a href="../has_outputs/">has_outputs</a></td>
 <td>domain</td>
 <td><a href="./">PlannedProcess</a></td>
@@ -335,6 +393,7 @@
 <pre><code class="language-yaml">name: PlannedProcess
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: NamedThing
+abstract: true
 slots:
 - has_inputs
 - has_outputs
@@ -346,6 +405,7 @@ slots:
 <pre><code class="language-yaml">name: PlannedProcess
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: NamedThing
+abstract: true
 attributes:
   has_inputs:
     name: has_inputs
@@ -404,6 +464,19 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+  type:
+    name: type
+    description: The type of a thing
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: type
+    owner: PlannedProcess
+    domain_of:
+    - Root
+    range: uriorcurie
+    required: true
 
 </code></pre>
 </details>

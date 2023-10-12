@@ -201,6 +201,9 @@
 </a>
 <h1 id="class-namedthing">Class: NamedThing</h1>
 <p><em>A generic grouping for any identifiable entity</em></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
 <div class="mermaid"> classDiagram
     class NamedThing
@@ -216,6 +219,8 @@
       NamedThing : id
 
       NamedThing : name
+
+      NamedThing : type
 
 
 </div>
@@ -259,6 +264,12 @@
 <td>A human-readable description for a thing</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The type of a thing</td>
+<td><a href="../Root/">Root</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -293,6 +304,7 @@
 description: A generic grouping for any identifiable entity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: Root
+abstract: true
 slots:
 - id
 - name
@@ -307,6 +319,7 @@ class_uri: schema:Thing
 description: A generic grouping for any identifiable entity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: Root
+abstract: true
 attributes:
   id:
     name: id
@@ -343,6 +356,19 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+  type:
+    name: type
+    description: The type of a thing
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: type
+    owner: NamedThing
+    domain_of:
+    - Root
+    range: uriorcurie
+    required: true
 class_uri: schema:Thing
 
 </code></pre>

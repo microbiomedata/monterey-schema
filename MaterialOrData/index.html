@@ -221,6 +221,8 @@
 
       MaterialOrData : name
 
+      MaterialOrData : type
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -265,6 +267,12 @@
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The type of a thing</td>
+<td><a href="../Root/">Root</a></td>
 </tr>
 </tbody>
 </table>
@@ -324,6 +332,7 @@
 <pre><code class="language-yaml">name: MaterialOrData
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: NamedThing
+class_uri: monterey_schema:MaterialOrData
 
 </code></pre>
 </details>
@@ -368,6 +377,20 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+  type:
+    name: type
+    description: The type of a thing
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    slot_uri: rdf:type
+    designates_type: true
+    alias: type
+    owner: MaterialOrData
+    domain_of:
+    - Root
+    range: uriorcurie
+    required: true
+class_uri: monterey_schema:MaterialOrData
 
 </code></pre>
 </details>

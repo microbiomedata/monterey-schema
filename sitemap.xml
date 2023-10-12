@@ -2,172 +2,207 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/AnonymousThing/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Boolean/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Curie/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/DataEntity/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/DataGeneration/</loc>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/DataProcessing/</loc>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/Database/</loc>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Date/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/DateOrDatetime/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Datetime/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Decimal/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Double/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Float/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Integer/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Jsonpath/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Jsonpointer/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/MaterialEntity/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/MaterialOrData/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/MaterialProcessing/</loc>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/NamedThing/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Ncname/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Nodeidentifier/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Objectidentifier/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/PlannedProcess/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Root/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Sparqlpath/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/String/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Time/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Uri/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/Uriorcurie/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/about/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/description/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/has_inputs/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/has_outputs/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/id/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/monterey-schema/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://microbiomedata.github.io/monterey-schema/name/</loc>
-         <lastmod>2023-10-11</lastmod>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/object_collection/</loc>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/process_collection/</loc>
+         <lastmod>2023-10-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://microbiomedata.github.io/monterey-schema/type/</loc>
+         <lastmod>2023-10-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
