@@ -33,6 +33,22 @@ classes:
       - type
       - category
 
+  AttributeValue:
+    is_a: AnonymousThing
+    abstract: true
+    comments:
+      - retire TextValue
+    slots:
+      - has_raw_value
+
+  QuantityValue:
+    is_a: AttributeValue
+    slots:
+      - has_unit
+      - has_numeric_value
+      - has_minimum_value
+      - has_maximum_value
+
   NamedThing:
     abstract: true
     is_a: NmdcClass
@@ -208,6 +224,17 @@ slots:
     see_also:
       - https://orcid.org/
     required: true
+
+  has_raw_value: { }
+  has_unit: { }
+  has_numeric_value:
+    todos:
+      - set the range to anyOf integer or float?
+    required: true
+  has_minimum_value:
+    is_a: has_numeric_value
+  has_maximum_value:
+    is_a: has_numeric_value
 
 #  primary_email:
 #    slot_uri: schema:email
