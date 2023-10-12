@@ -1,2 +1,3 @@
+type: schema:Thing
 id: example:nt-001
 name: foo bar

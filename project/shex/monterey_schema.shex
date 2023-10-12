@@ -51,11 +51,41 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<DataEntity> CLOSED {
-    (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
-          rdf:type [ <MaterialOrData> ] ?
+<Database> CLOSED {
+    (  $<Database_tes> (  &<DataEntity_tes> ;
+          rdf:type [ <DataEntity> ] ?
        ) ;
-       rdf:type [ <DataEntity> ]
+       rdf:type [ <Database> ]
+    )
+}
+
+<DataEntity>  (
+    CLOSED {
+       (  $<DataEntity_tes> (  &<MaterialOrData_tes> ;
+             rdf:type [ <MaterialOrData> ] ?
+          ) ;
+          rdf:type [ <DataEntity> ]
+       )
+    } OR @<Database>
+)
+
+<DataGeneration> CLOSED {
+    (  $<DataGeneration_tes> (  &<PlannedProcess_tes> ;
+          rdf:type [ <PlannedProcess> ] ? ;
+          <has_inputs> @<MaterialEntity> * ;
+          <has_outputs> @<DataEntity> *
+       ) ;
+       rdf:type [ <DataGeneration> ]
+    )
+}
+
+<DataProcessing> CLOSED {
+    (  $<DataProcessing_tes> (  &<PlannedProcess_tes> ;
+          rdf:type [ <PlannedProcess> ] ? ;
+          <has_inputs> @<DataEntity> * ;
+          <has_outputs> @<DataEntity> *
+       ) ;
+       rdf:type [ <DataProcessing> ]
     )
 }
 
@@ -77,19 +107,35 @@ linkml:Sparqlpath xsd:string
     } OR @<DataEntity> OR @<MaterialEntity>
 )
 
+<MaterialProcessing> CLOSED {
+    (  $<MaterialProcessing_tes> (  &<PlannedProcess_tes> ;
+          rdf:type [ <PlannedProcess> ] ? ;
+          <has_inputs> @<MaterialEntity> * ;
+          <has_outputs> @<MaterialEntity> *
+       ) ;
+       rdf:type [ <MaterialProcessing> ]
+    )
+}
+
 <NamedThing>  (
-    CLOSED {
-       (  $<NamedThing_tes> (  &<Root_tes> ;
-             rdf:type [ <Root> ] ? ;
-             schema1:name @linkml:String ? ;
-             schema1:description @linkml:String ?
-          ) ;
-          rdf:type [ schema1:Thing ]
-       )
-    } OR @<MaterialOrData> OR @<PlannedProcess>
+    @<MaterialOrData> OR @<PlannedProcess>
 )
 
-<PlannedProcess> CLOSED {
+<NamedThing_struct> {
+    (  $<NamedThing_tes> (  &<Root_tes> ;
+          rdf:type [ <Root> ] ? ;
+          schema1:name @linkml:String ? ;
+          schema1:description @linkml:String ?
+       ) ;
+       rdf:type [ schema1:Thing ]
+    )
+}
+
+<PlannedProcess>  (
+    @<DataGeneration> OR @<DataProcessing> OR @<MaterialProcessing>
+)
+
+<PlannedProcess_struct> {
     (  $<PlannedProcess_tes> (  &<NamedThing_tes> ;
           rdf:type [ schema1:Thing ] ? ;
           <has_inputs> @<MaterialOrData> * ;
@@ -104,7 +150,7 @@ linkml:Sparqlpath xsd:string
 )
 
 <Root_struct> {
-    (  $<Root_tes> rdf:type . * ;
+    (  $<Root_tes> rdf:type @linkml:Uriorcurie ;
        rdf:type [ <Root> ] ?
     )
 }

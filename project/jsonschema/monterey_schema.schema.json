@@ -15,84 +15,23 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:DataEntity"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
-                "id"
+                "id",
+                "type"
             ],
             "title": "DataEntity",
             "type": "object"
         },
-        "MaterialEntity": {
-            "additionalProperties": false,
-            "description": "",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "MaterialEntity",
-            "type": "object"
-        },
-        "MaterialOrData": {
-            "additionalProperties": false,
-            "description": "",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "MaterialOrData",
-            "type": "object"
-        },
-        "NamedThing": {
-            "additionalProperties": false,
-            "description": "A generic grouping for any identifiable entity",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "NamedThing",
-            "type": "object"
-        },
-        "PlannedProcess": {
+        "DataGeneration": {
             "additionalProperties": false,
             "description": "",
             "properties": {
@@ -119,19 +58,232 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:DataGeneration"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
-                "id"
+                "id",
+                "type"
             ],
-            "title": "PlannedProcess",
+            "title": "DataGeneration",
+            "type": "object"
+        },
+        "DataProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "has_inputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_outputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:DataProcessing"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "title": "DataProcessing",
+            "type": "object"
+        },
+        "Database": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:Database"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "title": "Database",
+            "type": "object"
+        },
+        "MaterialEntity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:MaterialEntity"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "title": "MaterialEntity",
+            "type": "object"
+        },
+        "MaterialOrData": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:MaterialOrData"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "title": "MaterialOrData",
+            "type": "object"
+        },
+        "MaterialProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "has_inputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_outputs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of a thing",
+                    "enum": [
+                        "monterey_schema:MaterialProcessing"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "type"
+            ],
+            "title": "MaterialProcessing",
             "type": "object"
         }
     },
     "$id": "https://w3id.org/microbiomedata/monterey-schema",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": true,
+    "description": "",
     "metamodel_version": "1.7.0",
+    "properties": {
+        "description": {
+            "description": "A human-readable description for a thing",
+            "type": "string"
+        },
+        "id": {
+            "description": "A unique identifier for a thing",
+            "type": "string"
+        },
+        "name": {
+            "description": "A human-readable name for a thing",
+            "type": "string"
+        },
+        "type": {
+            "description": "The type of a thing",
+            "enum": [
+                "monterey_schema:Database"
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "id",
+        "type"
+    ],
     "title": "monterey-schema",
     "type": "object",
     "version": null

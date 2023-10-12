@@ -2,6 +2,7 @@
    "example": "https://example.org/",
    "linkml": "https://w3id.org/linkml/",
    "monterey_schema": "https://w3id.org/microbiomedata/monterey-schema/",
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
    "schema": "http://schema.org/",
    "NamedThing": {
       "@id": "schema:Thing"

@@ -5,18 +5,23 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 schema1:Thing a sh:NodeShape ;
-    sh:closed true ;
+    sh:closed false ;
     sh:description "A generic grouping for any identifiable entity" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path schema1:description ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
@@ -27,89 +32,188 @@ schema1:Thing a sh:NodeShape ;
 monterey_schema:AnonymousThing a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path rdf:type ] ;
     sh:targetClass monterey_schema:AnonymousThing .
 
-monterey_schema:DataEntity a sh:NodeShape ;
+monterey_schema:DataGeneration a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:description "A unique identifier for a thing" ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path schema1:name ] ;
-    sh:targetClass monterey_schema:DataEntity .
-
-monterey_schema:MaterialEntity a sh:NodeShape ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
+        [ sh:class monterey_schema:DataEntity ;
+            sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path schema1:name ] ;
-    sh:targetClass monterey_schema:MaterialEntity .
-
-monterey_schema:PlannedProcess a sh:NodeShape ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
+            sh:path monterey_schema:has_outputs ],
+        [ sh:class monterey_schema:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:has_inputs ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path schema1:description ],
-        [ sh:class monterey_schema:MaterialOrData ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path monterey_schema:has_inputs ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ] ;
+    sh:targetClass monterey_schema:DataGeneration .
+
+monterey_schema:DataProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:order 3 ;
             sh:path schema1:name ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:class monterey_schema:DataEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path monterey_schema:has_outputs ],
+        [ sh:class monterey_schema:DataEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:has_inputs ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:description ] ;
+    sh:targetClass monterey_schema:DataProcessing .
+
+monterey_schema:Database a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
         [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ] ;
+    sh:targetClass monterey_schema:Database .
+
+monterey_schema:MaterialProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:class monterey_schema:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:has_inputs ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:description ],
+        [ sh:class monterey_schema:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path monterey_schema:has_outputs ] ;
+    sh:targetClass monterey_schema:MaterialProcessing .
+
+monterey_schema:PlannedProcess a sh:NodeShape ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 2 ;
             sh:path schema1:identifier ],
         [ sh:class monterey_schema:MaterialOrData ;
             sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:has_inputs ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:class monterey_schema:MaterialOrData ;
+            sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path monterey_schema:has_outputs ] ;
+            sh:path monterey_schema:has_outputs ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:description ] ;
     sh:targetClass monterey_schema:PlannedProcess .
 
 monterey_schema:Root a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path rdf:type ] ;
     sh:targetClass monterey_schema:Root .
 
 monterey_schema:MaterialOrData a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
+    sh:property [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ],
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -119,6 +223,61 @@ monterey_schema:MaterialOrData a sh:NodeShape ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ] ;
     sh:targetClass monterey_schema:MaterialOrData .
+
+monterey_schema:DataEntity a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ] ;
+    sh:targetClass monterey_schema:DataEntity .
+
+monterey_schema:MaterialEntity a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass monterey_schema:MaterialEntity .
 
