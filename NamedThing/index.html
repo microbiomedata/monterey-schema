@@ -207,7 +207,7 @@
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
 <div class="mermaid"> classDiagram
     class NamedThing
-      Root &lt;|-- NamedThing
+      NmdcClass &lt;|-- NamedThing
 
 
       NamedThing &lt;|-- MaterialOrData
@@ -226,7 +226,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Root/">Root</a><ul>
+<li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><strong>NamedThing</strong><ul>
 <li><a href="../MaterialOrData/">MaterialOrData</a></li>
 <li><a href="../PlannedProcess/">PlannedProcess</a></li>
@@ -268,7 +268,7 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
-<td><a href="../Root/">Root</a></td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -303,12 +303,13 @@
 <pre><code class="language-yaml">name: NamedThing
 description: A generic grouping for any identifiable entity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
-is_a: Root
+is_a: NmdcClass
 abstract: true
 slots:
 - id
 - name
 - description
+- type
 class_uri: schema:Thing
 
 </code></pre>
@@ -318,7 +319,7 @@ class_uri: schema:Thing
 <pre><code class="language-yaml">name: NamedThing
 description: A generic grouping for any identifiable entity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
-is_a: Root
+is_a: NmdcClass
 abstract: true
 attributes:
   id:
@@ -366,7 +367,8 @@ attributes:
     alias: type
     owner: NamedThing
     domain_of:
-    - Root
+    - AnonymousThing
+    - NamedThing
     range: uriorcurie
     required: true
 class_uri: schema:Thing

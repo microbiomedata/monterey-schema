@@ -206,7 +206,7 @@
 <p>URI: <a href="https://w3id.org/microbiomedata/monterey-schema/AnonymousThing">monterey_schema:AnonymousThing</a></p>
 <div class="mermaid"> classDiagram
     class AnonymousThing
-      Root &lt;|-- AnonymousThing
+      NmdcClass &lt;|-- AnonymousThing
 
       AnonymousThing : type
 
@@ -214,7 +214,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Root/">Root</a><ul>
+<li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><strong>AnonymousThing</strong></li>
 </ul>
 </li>
@@ -234,7 +234,7 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
-<td><a href="../Root/">Root</a></td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -268,8 +268,10 @@
 <details>
 <pre><code class="language-yaml">name: AnonymousThing
 from_schema: https://w3id.org/microbiomedata/monterey-schema
-is_a: Root
+is_a: NmdcClass
 abstract: true
+slots:
+- type
 
 </code></pre>
 </details>
@@ -277,7 +279,7 @@ abstract: true
 <details>
 <pre><code class="language-yaml">name: AnonymousThing
 from_schema: https://w3id.org/microbiomedata/monterey-schema
-is_a: Root
+is_a: NmdcClass
 abstract: true
 attributes:
   type:
@@ -290,7 +292,8 @@ attributes:
     alias: type
     owner: AnonymousThing
     domain_of:
-    - Root
+    - AnonymousThing
+    - NamedThing
     range: uriorcurie
     required: true
 

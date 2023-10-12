@@ -222,7 +222,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Root/">Root</a><ul>
+<li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><a href="../MaterialOrData/">MaterialOrData</a><ul>
 <li><strong>MaterialEntity</strong></li>
@@ -266,7 +266,7 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
-<td><a href="../Root/">Root</a></td>
+<td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 </tbody>
 </table>
@@ -387,7 +387,8 @@ attributes:
     alias: type
     owner: MaterialEntity
     domain_of:
-    - Root
+    - AnonymousThing
+    - NamedThing
     range: uriorcurie
     required: true
 class_uri: monterey_schema:MaterialEntity
