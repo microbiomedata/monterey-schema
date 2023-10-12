@@ -214,6 +214,10 @@
       NamedThing &lt;|-- PlannedProcess
 
 
+      NamedThing : category
+
+          NamedThing --|&gt; GeneralCategories : category
+
       NamedThing : description
 
       NamedThing : id
@@ -270,6 +274,12 @@
 <td>The type of a thing</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
+<td>direct</td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -310,6 +320,7 @@ slots:
 - name
 - description
 - type
+- category
 class_uri: schema:Thing
 
 </code></pre>
@@ -370,6 +381,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: NamedThing
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 class_uri: schema:Thing
 

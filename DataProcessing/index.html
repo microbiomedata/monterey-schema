@@ -205,6 +205,10 @@
     class DataProcessing
       PlannedProcess &lt;|-- DataProcessing
 
+      DataProcessing : category
+
+          DataProcessing --|&gt; GeneralCategories : category
+
       DataProcessing : description
 
       DataProcessing : has_inputs
@@ -255,7 +259,7 @@
 </tr>
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
-<td>0..* <br/> <a href="../DataEntity/">DataEntity</a></td>
+<td>1..* <br/> <a href="../DataEntity/">DataEntity</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -281,6 +285,12 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
+<td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 </tbody>
@@ -370,6 +380,7 @@ attributes:
     domain_of:
     - PlannedProcess
     range: DataEntity
+    required: true
   id:
     name: id
     description: A unique identifier for a thing
@@ -418,6 +429,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: DataProcessing
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 class_uri: monterey_schema:DataProcessing
 

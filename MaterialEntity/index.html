@@ -210,6 +210,15 @@
     class MaterialEntity
       MaterialOrData &lt;|-- MaterialEntity
 
+
+      MaterialEntity &lt;|-- Person
+      MaterialEntity &lt;|-- Instrument
+
+
+      MaterialEntity : category
+
+          MaterialEntity --|&gt; GeneralCategories : category
+
       MaterialEntity : description
 
       MaterialEntity : id
@@ -225,7 +234,11 @@
 <li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><a href="../MaterialOrData/">MaterialOrData</a><ul>
-<li><strong>MaterialEntity</strong></li>
+<li><strong>MaterialEntity</strong><ul>
+<li><a href="../Person/">Person</a></li>
+<li><a href="../Instrument/">Instrument</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -266,6 +279,12 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
+<td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 </tbody>
@@ -390,6 +409,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: MaterialEntity
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 class_uri: monterey_schema:MaterialEntity
 

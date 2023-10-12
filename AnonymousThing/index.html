@@ -208,6 +208,10 @@
     class AnonymousThing
       NmdcClass &lt;|-- AnonymousThing
 
+      AnonymousThing : category
+
+          AnonymousThing --|&gt; GeneralCategories : category
+
       AnonymousThing : type
 
 
@@ -234,6 +238,12 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -272,6 +282,7 @@ is_a: NmdcClass
 abstract: true
 slots:
 - type
+- category
 
 </code></pre>
 </details>
@@ -295,6 +306,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: AnonymousThing
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 
 </code></pre>

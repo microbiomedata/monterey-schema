@@ -205,7 +205,15 @@
     class MaterialProcessing
       PlannedProcess &lt;|-- MaterialProcessing
 
+      MaterialProcessing : category
+
+          MaterialProcessing --|&gt; GeneralCategories : category
+
       MaterialProcessing : description
+
+      MaterialProcessing : followed
+
+          MaterialProcessing --|&gt; Protocol : followed
 
       MaterialProcessing : has_inputs
 
@@ -220,6 +228,10 @@
       MaterialProcessing : name
 
       MaterialProcessing : type
+
+      MaterialProcessing : used
+
+          MaterialProcessing --|&gt; Instrument : used
 
 
 </div>
@@ -248,6 +260,18 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../used/">used</a></td>
+<td>0..1 <br/> <a href="../Instrument/">Instrument</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../followed/">followed</a></td>
+<td>0..1 <br/> <a href="../Protocol/">Protocol</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../has_inputs/">has_inputs</a></td>
 <td>0..* <br/> <a href="../MaterialEntity/">MaterialEntity</a></td>
 <td></td>
@@ -255,7 +279,7 @@
 </tr>
 <tr>
 <td><a href="../has_outputs/">has_outputs</a></td>
-<td>0..* <br/> <a href="../MaterialEntity/">MaterialEntity</a></td>
+<td>1..* <br/> <a href="../MaterialEntity/">MaterialEntity</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -281,6 +305,12 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
+<td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 </tbody>
@@ -316,6 +346,9 @@
 <pre><code class="language-yaml">name: MaterialProcessing
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: PlannedProcess
+slots:
+- used
+- followed
 slot_usage:
   has_inputs:
     name: has_inputs
@@ -348,6 +381,28 @@ slot_usage:
     - PlannedProcess
     range: MaterialEntity
 attributes:
+  used:
+    name: used
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    domain: PlannedProcess
+    alias: used
+    owner: MaterialProcessing
+    domain_of:
+    - MaterialProcessing
+    - DataGeneration
+    range: Instrument
+  followed:
+    name: followed
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    domain: PlannedProcess
+    alias: followed
+    owner: MaterialProcessing
+    domain_of:
+    - MaterialProcessing
+    - DataGeneration
+    range: Protocol
   has_inputs:
     name: has_inputs
     from_schema: https://w3id.org/microbiomedata/monterey-schema
@@ -370,6 +425,7 @@ attributes:
     domain_of:
     - PlannedProcess
     range: MaterialEntity
+    required: true
   id:
     name: id
     description: A unique identifier for a thing
@@ -418,6 +474,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: MaterialProcessing
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 class_uri: monterey_schema:MaterialProcessing
 

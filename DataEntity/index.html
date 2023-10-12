@@ -210,6 +210,14 @@
     class DataEntity
       MaterialOrData &lt;|-- DataEntity
 
+
+      DataEntity &lt;|-- Protocol
+
+
+      DataEntity : category
+
+          DataEntity --|&gt; GeneralCategories : category
+
       DataEntity : description
 
       DataEntity : id
@@ -218,6 +226,8 @@
 
       DataEntity : type
 
+      DataEntity : url
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -225,7 +235,10 @@
 <li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><a href="../MaterialOrData/">MaterialOrData</a><ul>
-<li><strong>DataEntity</strong></li>
+<li><strong>DataEntity</strong><ul>
+<li><a href="../Protocol/">Protocol</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -244,6 +257,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../url/">url</a></td>
+<td>1..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
@@ -266,6 +285,12 @@
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The type of a thing</td>
+<td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../category/">category</a></td>
+<td>1..1 <br/> <a href="../GeneralCategories/">GeneralCategories</a></td>
+<td></td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 </tbody>
@@ -332,6 +357,8 @@
 <pre><code class="language-yaml">name: DataEntity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: MaterialOrData
+slots:
+- url
 class_uri: monterey_schema:DataEntity
 
 </code></pre>
@@ -342,6 +369,16 @@ class_uri: monterey_schema:DataEntity
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: MaterialOrData
 attributes:
+  url:
+    name: url
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: url
+    owner: DataEntity
+    domain_of:
+    - DataEntity
+    range: string
+    required: true
   id:
     name: id
     description: A unique identifier for a thing
@@ -390,6 +427,17 @@ attributes:
     - AnonymousThing
     - NamedThing
     range: uriorcurie
+    required: true
+  category:
+    name: category
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: category
+    owner: DataEntity
+    domain_of:
+    - AnonymousThing
+    - NamedThing
+    range: GeneralCategories
     required: true
 class_uri: monterey_schema:DataEntity
 
