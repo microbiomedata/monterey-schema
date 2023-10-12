@@ -88,6 +88,9 @@ classes:
     slots:
       - has_inputs
       - has_outputs
+      - speed
+      - temperature
+      - duration
 
   Investigation:
     is_a: PlannedProcess
@@ -235,6 +238,15 @@ slots:
     is_a: has_numeric_value
   has_maximum_value:
     is_a: has_numeric_value
+
+  speed:
+    range: QuantityValue
+
+  temperature:
+    range: QuantityValue
+
+  duration:
+    range: QuantityValue
 
 #  primary_email:
 #    slot_uri: schema:email
