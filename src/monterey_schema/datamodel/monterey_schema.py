@@ -1,5 +1,5 @@
 # Auto generated from monterey_schema.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-12T00:47:35
+# Generation date: 2023-10-12T01:08:57
 # Schema: monterey-schema
 #
 # id: https://w3id.org/microbiomedata/monterey-schema
@@ -62,6 +62,10 @@ class PlannedProcessId(NamedThingId):
     pass
 
 
+class InvestigationId(PlannedProcessId):
+    pass
+
+
 class MaterialProcessingId(PlannedProcessId):
     pass
 
@@ -71,6 +75,18 @@ class DataProcessingId(PlannedProcessId):
 
 
 class DataGenerationId(PlannedProcessId):
+    pass
+
+
+class PersonId(MaterialEntityId):
+    pass
+
+
+class InstrumentId(MaterialEntityId):
+    pass
+
+
+class ProtocolId(DataEntityId):
     pass
 
 
@@ -93,11 +109,17 @@ class AnonymousThing(NmdcClass):
     class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.AnonymousThing
 
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
         self.type = str(self.class_class_curie)
+
+        if self._is_empty(self.category):
+            self.MissingRequiredField("category")
+        if not isinstance(self.category, GeneralCategories):
+            self.category = GeneralCategories(self.category)
 
         super().__post_init__(**kwargs)
 
@@ -116,6 +138,7 @@ class NamedThing(NmdcClass):
 
     id: Union[str, NamedThingId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
     name: Optional[str] = None
     description: Optional[str] = None
 
@@ -128,6 +151,11 @@ class NamedThing(NmdcClass):
         if self._is_empty(self.type):
             self.MissingRequiredField("type")
         self.type = str(self.class_class_curie)
+
+        if self._is_empty(self.category):
+            self.MissingRequiredField("category")
+        if not isinstance(self.category, GeneralCategories):
+            self.category = GeneralCategories(self.category)
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
@@ -174,12 +202,9 @@ class MaterialOrData(NamedThing):
 
     id: Union[str, MaterialOrDataId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, MaterialOrDataId):
-            self.id = MaterialOrDataId(self.id)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.type):
@@ -198,6 +223,7 @@ class MaterialEntity(MaterialOrData):
 
     id: Union[str, MaterialEntityId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -222,6 +248,7 @@ class DataEntity(MaterialOrData):
 
     id: Union[str, DataEntityId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -255,17 +282,46 @@ class PlannedProcess(NamedThing):
 
     id: Union[str, PlannedProcessId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    has_outputs: Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]] = None
     has_inputs: Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]] = empty_list()
-    has_outputs: Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.has_outputs):
+            self.MissingRequiredField("has_outputs")
+        if not isinstance(self.has_outputs, list):
+            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
+        self.has_outputs = [v if isinstance(v, MaterialOrDataId) else MaterialOrDataId(v) for v in self.has_outputs]
+
         if not isinstance(self.has_inputs, list):
             self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
         self.has_inputs = [v if isinstance(v, MaterialOrDataId) else MaterialOrDataId(v) for v in self.has_inputs]
 
-        if not isinstance(self.has_outputs, list):
-            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
-        self.has_outputs = [v if isinstance(v, MaterialOrDataId) else MaterialOrDataId(v) for v in self.has_outputs]
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class Investigation(PlannedProcess):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Investigation
+    class_class_curie: ClassVar[str] = "monterey_schema:Investigation"
+    class_name: ClassVar[str] = "Investigation"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Investigation
+
+    id: Union[str, InvestigationId] = None
+    type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    has_outputs: Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, InvestigationId):
+            self.id = InvestigationId(self.id)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.type):
@@ -284,8 +340,11 @@ class MaterialProcessing(PlannedProcess):
 
     id: Union[str, MaterialProcessingId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    has_outputs: Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]] = None
+    used: Optional[Union[str, InstrumentId]] = None
+    followed: Optional[Union[str, ProtocolId]] = None
     has_inputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
-    has_outputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -293,13 +352,21 @@ class MaterialProcessing(PlannedProcess):
         if not isinstance(self.id, MaterialProcessingId):
             self.id = MaterialProcessingId(self.id)
 
-        if not isinstance(self.has_inputs, list):
-            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
-        self.has_inputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_inputs]
-
+        if self._is_empty(self.has_outputs):
+            self.MissingRequiredField("has_outputs")
         if not isinstance(self.has_outputs, list):
             self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
         self.has_outputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_outputs]
+
+        if self.used is not None and not isinstance(self.used, InstrumentId):
+            self.used = InstrumentId(self.used)
+
+        if self.followed is not None and not isinstance(self.followed, ProtocolId):
+            self.followed = ProtocolId(self.followed)
+
+        if not isinstance(self.has_inputs, list):
+            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
+        self.has_inputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_inputs]
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.type):
@@ -318,8 +385,9 @@ class DataProcessing(PlannedProcess):
 
     id: Union[str, DataProcessingId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    has_outputs: Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]] = None
     has_inputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
-    has_outputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -327,13 +395,15 @@ class DataProcessing(PlannedProcess):
         if not isinstance(self.id, DataProcessingId):
             self.id = DataProcessingId(self.id)
 
-        if not isinstance(self.has_inputs, list):
-            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
-        self.has_inputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_inputs]
-
+        if self._is_empty(self.has_outputs):
+            self.MissingRequiredField("has_outputs")
         if not isinstance(self.has_outputs, list):
             self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
         self.has_outputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_outputs]
+
+        if not isinstance(self.has_inputs, list):
+            self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
+        self.has_inputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_inputs]
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.type):
@@ -352,8 +422,11 @@ class DataGeneration(PlannedProcess):
 
     id: Union[str, DataGenerationId] = None
     type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    has_outputs: Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]] = None
+    used: Optional[Union[str, InstrumentId]] = None
+    followed: Optional[Union[str, ProtocolId]] = None
     has_inputs: Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]] = empty_list()
-    has_outputs: Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -361,13 +434,102 @@ class DataGeneration(PlannedProcess):
         if not isinstance(self.id, DataGenerationId):
             self.id = DataGenerationId(self.id)
 
+        if self._is_empty(self.has_outputs):
+            self.MissingRequiredField("has_outputs")
+        if not isinstance(self.has_outputs, list):
+            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
+        self.has_outputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_outputs]
+
+        if self.used is not None and not isinstance(self.used, InstrumentId):
+            self.used = InstrumentId(self.used)
+
+        if self.followed is not None and not isinstance(self.followed, ProtocolId):
+            self.followed = ProtocolId(self.followed)
+
         if not isinstance(self.has_inputs, list):
             self.has_inputs = [self.has_inputs] if self.has_inputs is not None else []
         self.has_inputs = [v if isinstance(v, MaterialEntityId) else MaterialEntityId(v) for v in self.has_inputs]
 
-        if not isinstance(self.has_outputs, list):
-            self.has_outputs = [self.has_outputs] if self.has_outputs is not None else []
-        self.has_outputs = [v if isinstance(v, DataEntityId) else DataEntityId(v) for v in self.has_outputs]
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class Person(MaterialEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Person
+    class_class_curie: ClassVar[str] = "monterey_schema:Person"
+    class_name: ClassVar[str] = "Person"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Person
+
+    id: Union[str, PersonId] = None
+    type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+    orcid: Union[str, URIorCURIE] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PersonId):
+            self.id = PersonId(self.id)
+
+        if self._is_empty(self.orcid):
+            self.MissingRequiredField("orcid")
+        if not isinstance(self.orcid, URIorCURIE):
+            self.orcid = URIorCURIE(self.orcid)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class Instrument(MaterialEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Instrument
+    class_class_curie: ClassVar[str] = "monterey_schema:Instrument"
+    class_name: ClassVar[str] = "Instrument"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Instrument
+
+    id: Union[str, InstrumentId] = None
+    type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, InstrumentId):
+            self.id = InstrumentId(self.id)
+
+        super().__post_init__(**kwargs)
+        if self._is_empty(self.type):
+            self.MissingRequiredField("type")
+        self.type = str(self.class_class_curie)
+
+
+@dataclass
+class Protocol(DataEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Protocol
+    class_class_curie: ClassVar[str] = "monterey_schema:Protocol"
+    class_name: ClassVar[str] = "Protocol"
+    class_model_uri: ClassVar[URIRef] = MONTEREY_SCHEMA.Protocol
+
+    id: Union[str, ProtocolId] = None
+    type: Union[str, URIorCURIE] = None
+    category: Union[str, "GeneralCategories"] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ProtocolId):
+            self.id = ProtocolId(self.id)
 
         super().__post_init__(**kwargs)
         if self._is_empty(self.type):
@@ -376,7 +538,15 @@ class DataGeneration(PlannedProcess):
 
 
 # Enumerations
+class GeneralCategories(EnumDefinitionImpl):
 
+    red = PermissibleValue(text="red")
+    green = PermissibleValue(text="green")
+    blue = PermissibleValue(text="blue")
+
+    _defn = EnumDefinition(
+        name="GeneralCategories",
+    )
 
 # Slots
 class slots:
@@ -386,7 +556,7 @@ slots.has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="has_inputs", curie
                    model_uri=MONTEREY_SCHEMA.has_inputs, domain=PlannedProcess, range=Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]])
 
 slots.has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
-                   model_uri=MONTEREY_SCHEMA.has_outputs, domain=PlannedProcess, range=Optional[Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]]])
+                   model_uri=MONTEREY_SCHEMA.has_outputs, domain=PlannedProcess, range=Union[Union[str, MaterialOrDataId], List[Union[str, MaterialOrDataId]]])
 
 slots.id = Slot(uri=SCHEMA.identifier, name="id", curie=SCHEMA.curie('identifier'),
                    model_uri=MONTEREY_SCHEMA.id, domain=None, range=URIRef)
@@ -406,20 +576,35 @@ slots.process_collection = Slot(uri=MONTEREY_SCHEMA.process_collection, name="pr
 slots.type = Slot(uri=RDF.type, name="type", curie=RDF.curie('type'),
                    model_uri=MONTEREY_SCHEMA.type, domain=None, range=Union[str, URIorCURIE])
 
+slots.category = Slot(uri=MONTEREY_SCHEMA.category, name="category", curie=MONTEREY_SCHEMA.curie('category'),
+                   model_uri=MONTEREY_SCHEMA.category, domain=None, range=Union[str, "GeneralCategories"])
+
+slots.url = Slot(uri=MONTEREY_SCHEMA.url, name="url", curie=MONTEREY_SCHEMA.curie('url'),
+                   model_uri=MONTEREY_SCHEMA.url, domain=None, range=str)
+
+slots.used = Slot(uri=MONTEREY_SCHEMA.used, name="used", curie=MONTEREY_SCHEMA.curie('used'),
+                   model_uri=MONTEREY_SCHEMA.used, domain=PlannedProcess, range=Optional[Union[str, InstrumentId]])
+
+slots.followed = Slot(uri=MONTEREY_SCHEMA.followed, name="followed", curie=MONTEREY_SCHEMA.curie('followed'),
+                   model_uri=MONTEREY_SCHEMA.followed, domain=PlannedProcess, range=Optional[Union[str, ProtocolId]])
+
+slots.orcid = Slot(uri=MONTEREY_SCHEMA.orcid, name="orcid", curie=MONTEREY_SCHEMA.curie('orcid'),
+                   model_uri=MONTEREY_SCHEMA.orcid, domain=None, range=Union[str, URIorCURIE])
+
 slots.MaterialProcessing_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="MaterialProcessing_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
                    model_uri=MONTEREY_SCHEMA.MaterialProcessing_has_inputs, domain=MaterialProcessing, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
 
 slots.MaterialProcessing_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="MaterialProcessing_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
-                   model_uri=MONTEREY_SCHEMA.MaterialProcessing_has_outputs, domain=MaterialProcessing, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
+                   model_uri=MONTEREY_SCHEMA.MaterialProcessing_has_outputs, domain=MaterialProcessing, range=Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]])
 
 slots.DataProcessing_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="DataProcessing_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
                    model_uri=MONTEREY_SCHEMA.DataProcessing_has_inputs, domain=DataProcessing, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])
 
 slots.DataProcessing_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="DataProcessing_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
-                   model_uri=MONTEREY_SCHEMA.DataProcessing_has_outputs, domain=DataProcessing, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])
+                   model_uri=MONTEREY_SCHEMA.DataProcessing_has_outputs, domain=DataProcessing, range=Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]])
 
 slots.DataGeneration_has_inputs = Slot(uri=MONTEREY_SCHEMA.has_inputs, name="DataGeneration_has_inputs", curie=MONTEREY_SCHEMA.curie('has_inputs'),
                    model_uri=MONTEREY_SCHEMA.DataGeneration_has_inputs, domain=DataGeneration, range=Optional[Union[Union[str, MaterialEntityId], List[Union[str, MaterialEntityId]]]])
 
 slots.DataGeneration_has_outputs = Slot(uri=MONTEREY_SCHEMA.has_outputs, name="DataGeneration_has_outputs", curie=MONTEREY_SCHEMA.curie('has_outputs'),
-                   model_uri=MONTEREY_SCHEMA.DataGeneration_has_outputs, domain=DataGeneration, range=Optional[Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]]])
+                   model_uri=MONTEREY_SCHEMA.DataGeneration_has_outputs, domain=DataGeneration, range=Union[Union[str, DataEntityId], List[Union[str, DataEntityId]]])

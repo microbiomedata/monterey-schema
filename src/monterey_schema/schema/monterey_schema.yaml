@@ -31,6 +31,7 @@ classes:
     abstract: true
     slots:
       - type
+      - category
 
   NamedThing:
     abstract: true
@@ -42,12 +43,14 @@ classes:
       - name
       - description
       - type
+      - category
     class_uri: schema:Thing
 
 
   MaterialOrData:
     is_a: NamedThing
     class_uri: monterey_schema:MaterialOrData
+    abstract: true
 
   MaterialEntity:
     is_a: MaterialOrData
@@ -56,6 +59,8 @@ classes:
   DataEntity:
     is_a: MaterialOrData
     class_uri: monterey_schema:DataEntity
+    slots:
+      - url
 
   Database:
     is_a: NmdcClass
@@ -68,6 +73,10 @@ classes:
       - has_inputs
       - has_outputs
 
+  Investigation:
+    is_a: PlannedProcess
+    class_uri: monterey_schema:Investigation
+
   MaterialProcessing:
     is_a: PlannedProcess
     class_uri: monterey_schema:MaterialProcessing
@@ -76,6 +85,9 @@ classes:
         range: MaterialEntity
       has_outputs:
         range: MaterialEntity
+    slots:
+      - used
+      - followed
 
   DataProcessing:
     is_a: PlannedProcess
@@ -94,6 +106,20 @@ classes:
         range: MaterialEntity
       has_outputs:
         range: DataEntity
+    slots:
+      - used
+      - followed
+
+  Person:
+    is_a: MaterialEntity
+    slots:
+      - orcid
+
+  Instrument:
+    is_a: MaterialEntity
+
+  Protocol:
+    is_a: DataEntity
 
 
 #  Person:
@@ -129,6 +155,7 @@ slots:
     domain: PlannedProcess
     range: MaterialOrData
     multivalued: true
+    required: true
 
   id:
     identifier: true
@@ -160,6 +187,28 @@ slots:
     description: The type of a thing
     required: true
 
+  category:
+    range: GeneralCategories
+    required: true
+
+  url:
+    required: true
+
+  used:
+    domain: PlannedProcess
+    range: Instrument
+
+  followed:
+    domain: PlannedProcess
+    range: Protocol
+
+  orcid:
+    range: uriorcurie
+    description: An identifier of a Person who participates in investigations
+    see_also:
+      - https://orcid.org/
+    required: true
+
 #  primary_email:
 #    slot_uri: schema:email
 #    description: The main email address of a person
@@ -173,8 +222,14 @@ slots:
 #  vital_status:
 #    range: PersonStatus
 #    description: living or dead status
-#
-#enums:
+
+enums:
+  GeneralCategories:
+    permissible_values:
+      red: { }
+      green: { }
+      blue: { }
+
 #  PersonStatus:
 #    permissible_values:
 #      ALIVE:

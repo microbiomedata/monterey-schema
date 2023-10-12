@@ -8,7 +8,12 @@ schema1:Thing a sh:NodeShape ;
     sh:closed false ;
     sh:description "A generic grouping for any identifiable entity" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The type of a thing" ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 3 ;
@@ -22,11 +27,11 @@ schema1:Thing a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
+        [ sh:in ( "red" "green" "blue" ) ;
             sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ] ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path monterey_schema:category ] ;
     sh:targetClass schema1:Thing .
 
 monterey_schema:AnonymousThing a sh:NodeShape ;
@@ -36,61 +41,88 @@ monterey_schema:AnonymousThing a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 0 ;
-            sh:path rdf:type ] ;
+            sh:path rdf:type ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path monterey_schema:category ] ;
     sh:targetClass monterey_schema:AnonymousThing .
 
 monterey_schema:DataGeneration a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
+    sh:property [ sh:class monterey_schema:Protocol ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema1:name ],
-        [ sh:class monterey_schema:DataEntity ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path monterey_schema:has_outputs ],
-        [ sh:class monterey_schema:MaterialEntity ;
+            sh:path monterey_schema:followed ],
+        [ sh:class monterey_schema:Instrument ;
+            sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
-            sh:path monterey_schema:has_inputs ],
+            sh:path monterey_schema:used ],
+        [ sh:class monterey_schema:DataEntity ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path monterey_schema:has_outputs ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 2 ;
+            sh:order 4 ;
             sh:path schema1:identifier ],
+        [ sh:class monterey_schema:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path monterey_schema:has_inputs ],
         [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path rdf:type ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 8 ;
+            sh:path monterey_schema:category ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path rdf:type ] ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ] ;
     sh:targetClass monterey_schema:DataGeneration .
 
 monterey_schema:DataProcessing a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:identifier ],
-        [ sh:description "The type of a thing" ;
+    sh:property [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 5 ;
             sh:path rdf:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path monterey_schema:category ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path schema1:description ],
         [ sh:class monterey_schema:DataEntity ;
+            sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
             sh:path monterey_schema:has_outputs ],
@@ -110,37 +142,92 @@ monterey_schema:Database a sh:NodeShape ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:targetClass monterey_schema:Database .
 
-monterey_schema:MaterialProcessing a sh:NodeShape ;
+monterey_schema:Investigation a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
+    sh:property [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path monterey_schema:category ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:class monterey_schema:MaterialOrData ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path monterey_schema:has_outputs ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema1:name ],
+        [ sh:class monterey_schema:MaterialOrData ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:has_inputs ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 2 ;
             sh:path schema1:identifier ],
-        [ sh:class monterey_schema:MaterialEntity ;
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ] ;
+    sh:targetClass monterey_schema:Investigation .
+
+monterey_schema:MaterialProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class monterey_schema:MaterialEntity ;
+            sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
-            sh:order 1 ;
+            sh:order 3 ;
             sh:path monterey_schema:has_outputs ],
-        [ sh:class monterey_schema:MaterialEntity ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path monterey_schema:has_inputs ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
         [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path rdf:type ],
+        [ sh:class monterey_schema:Instrument ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path monterey_schema:used ],
+        [ sh:class monterey_schema:Protocol ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path monterey_schema:followed ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 8 ;
+            sh:path monterey_schema:category ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path rdf:type ] ;
+            sh:path schema1:name ],
+        [ sh:class monterey_schema:MaterialEntity ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path monterey_schema:has_inputs ] ;
     sh:targetClass monterey_schema:MaterialProcessing .
 
 monterey_schema:NmdcClass a sh:NodeShape ;
@@ -148,14 +235,59 @@ monterey_schema:NmdcClass a sh:NodeShape ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:targetClass monterey_schema:NmdcClass .
 
+monterey_schema:Person a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path rdf:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:description ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path monterey_schema:category ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:identifier ],
+        [ sh:description "An identifier of a Person who participates in investigations" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path monterey_schema:orcid ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:name ] ;
+    sh:targetClass monterey_schema:Person .
+
 monterey_schema:PlannedProcess a sh:NodeShape ;
     sh:closed false ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a thing" ;
+    sh:property [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:description ],
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path rdf:type ],
+        [ sh:class monterey_schema:MaterialOrData ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path monterey_schema:has_outputs ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
@@ -165,31 +297,22 @@ monterey_schema:PlannedProcess a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path monterey_schema:has_inputs ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:identifier ],
-        [ sh:class monterey_schema:MaterialOrData ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path monterey_schema:has_outputs ],
-        [ sh:description "The type of a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 5 ;
-            sh:path rdf:type ] ;
-    sh:targetClass monterey_schema:PlannedProcess .
-
-monterey_schema:MaterialOrData a sh:NodeShape ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
-            sh:order 2 ;
+            sh:order 4 ;
             sh:path schema1:description ],
-        [ sh:description "The type of a thing" ;
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path monterey_schema:category ] ;
+    sh:targetClass monterey_schema:PlannedProcess .
+
+monterey_schema:Instrument a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 3 ;
@@ -199,51 +322,126 @@ monterey_schema:MaterialOrData a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path schema1:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path schema1:identifier ] ;
-    sh:targetClass monterey_schema:MaterialOrData .
-
-monterey_schema:DataEntity a sh:NodeShape ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path monterey_schema:category ] ;
+    sh:targetClass monterey_schema:Instrument .
+
+monterey_schema:Protocol a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path monterey_schema:category ],
         [ sh:description "The type of a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 3 ;
             sh:path rdf:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass monterey_schema:Protocol .
+
+monterey_schema:DataEntity a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path monterey_schema:category ] ;
     sh:targetClass monterey_schema:DataEntity .
 
 monterey_schema:MaterialEntity a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:in ( "red" "green" "blue" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path monterey_schema:category ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ] ;
+    sh:targetClass monterey_schema:MaterialEntity .
+
+monterey_schema:MaterialOrData a sh:NodeShape ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path schema1:description ],
-        [ sh:description "The type of a thing" ;
+        [ sh:in ( "red" "green" "blue" ) ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 3 ;
-            sh:path rdf:type ],
+            sh:order 4 ;
+            sh:path monterey_schema:category ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
@@ -253,6 +451,11 @@ monterey_schema:MaterialEntity a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 0 ;
-            sh:path schema1:identifier ] ;
-    sh:targetClass monterey_schema:MaterialEntity .
+            sh:path schema1:identifier ],
+        [ sh:description "The type of a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ] ;
+    sh:targetClass monterey_schema:MaterialOrData .
 

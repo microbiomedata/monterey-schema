@@ -4,6 +4,7 @@ message DataEntity
   string name = 0
   string description = 0
   uriorcurie type = 0
+  generalCategories category = 0
  }
 message DataGeneration
  {
@@ -11,6 +12,9 @@ message DataGeneration
   string name = 0
   string description = 0
   uriorcurie type = 0
+  generalCategories category = 0
+  instrument used = 0
+  protocol followed = 0
  repeated  materialEntity hasInputs = 0
  repeated  dataEntity hasOutputs = 0
  }
@@ -20,8 +24,27 @@ message DataProcessing
   string name = 0
   string description = 0
   uriorcurie type = 0
+  generalCategories category = 0
  repeated  dataEntity hasInputs = 0
  repeated  dataEntity hasOutputs = 0
+ }
+message Instrument
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  uriorcurie type = 0
+  generalCategories category = 0
+ }
+message Investigation
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  uriorcurie type = 0
+  generalCategories category = 0
+ repeated  materialOrData hasInputs = 0
+ repeated  materialOrData hasOutputs = 0
  }
 message MaterialEntity
  {
@@ -29,13 +52,7 @@ message MaterialEntity
   string name = 0
   string description = 0
   uriorcurie type = 0
- }
-message MaterialOrData
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
-  uriorcurie type = 0
+  generalCategories category = 0
  }
 message MaterialProcessing
  {
@@ -43,6 +60,26 @@ message MaterialProcessing
   string name = 0
   string description = 0
   uriorcurie type = 0
+  generalCategories category = 0
+  instrument used = 0
+  protocol followed = 0
  repeated  materialEntity hasInputs = 0
  repeated  materialEntity hasOutputs = 0
+ }
+message Person
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  uriorcurie type = 0
+  generalCategories category = 0
+  uriorcurie orcid = 0
+ }
+message Protocol
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  uriorcurie type = 0
+  generalCategories category = 0
  }

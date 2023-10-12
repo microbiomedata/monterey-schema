@@ -1,6 +1,7 @@
 interface AnonymousThing
   {
     type: Uriorcurie!
+    category: GeneralCategories!
   }
 
 type Database
@@ -13,6 +14,7 @@ type DataEntity
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
   }
 
 type DataGeneration
@@ -21,8 +23,11 @@ type DataGeneration
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
+    used: Instrument
+    followed: Protocol
     hasInputs: [MaterialEntity]
-    hasOutputs: [DataEntity]
+    hasOutputs: [DataEntity]!
   }
 
 type DataProcessing
@@ -31,8 +36,29 @@ type DataProcessing
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
     hasInputs: [DataEntity]
-    hasOutputs: [DataEntity]
+    hasOutputs: [DataEntity]!
+  }
+
+type Instrument
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    type: Uriorcurie!
+    category: GeneralCategories!
+  }
+
+type Investigation
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    type: Uriorcurie!
+    category: GeneralCategories!
+    hasInputs: [MaterialOrData]
+    hasOutputs: [MaterialOrData]!
   }
 
 type MaterialEntity
@@ -41,14 +67,16 @@ type MaterialEntity
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
   }
 
-type MaterialOrData
+interface MaterialOrData
   {
     id: Uriorcurie!
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
   }
 
 type MaterialProcessing
@@ -57,8 +85,11 @@ type MaterialProcessing
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
+    used: Instrument
+    followed: Protocol
     hasInputs: [MaterialEntity]
-    hasOutputs: [MaterialEntity]
+    hasOutputs: [MaterialEntity]!
   }
 
 interface NamedThing
@@ -67,10 +98,21 @@ interface NamedThing
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
   }
 
 interface NmdcClass
   {
+  }
+
+type Person
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    type: Uriorcurie!
+    category: GeneralCategories!
+    orcid: Uriorcurie!
   }
 
 interface PlannedProcess
@@ -79,7 +121,17 @@ interface PlannedProcess
     name: String
     description: String
     type: Uriorcurie!
+    category: GeneralCategories!
     hasInputs: [MaterialOrData]
-    hasOutputs: [MaterialOrData]
+    hasOutputs: [MaterialOrData]!
+  }
+
+type Protocol
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    type: Uriorcurie!
+    category: GeneralCategories!
   }
 

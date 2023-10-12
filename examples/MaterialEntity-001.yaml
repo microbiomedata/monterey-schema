@@ -1,3 +1,4 @@
-id: example:nt-001
+id: example:matent-001
 name: foo bar
 type: monterey_schema:MaterialEntity
+category: red

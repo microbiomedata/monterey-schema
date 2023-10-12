@@ -1,6 +1,7 @@
 {
-  "id": "example:nt-001",
+  "id": "example:matent-001",
   "type": "monterey_schema:MaterialEntity",
+  "category": "red",
   "name": "foo bar",
   "@type": "MaterialEntity"
 }
