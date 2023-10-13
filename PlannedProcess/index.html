@@ -214,6 +214,7 @@
       NamedThing &lt;|-- PlannedProcess
 
 
+      PlannedProcess &lt;|-- ProtocolExecution
       PlannedProcess &lt;|-- Investigation
       PlannedProcess &lt;|-- MaterialProcessing
       PlannedProcess &lt;|-- DataProcessing
@@ -259,6 +260,7 @@
 <li><a href="../NmdcClass/">NmdcClass</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><strong>PlannedProcess</strong><ul>
+<li><a href="../ProtocolExecution/">ProtocolExecution</a></li>
 <li><a href="../Investigation/">Investigation</a></li>
 <li><a href="../MaterialProcessing/">MaterialProcessing</a></li>
 <li><a href="../DataProcessing/">DataProcessing</a></li>
@@ -296,7 +298,7 @@
 <tr>
 <td><a href="../speed/">speed</a></td>
 <td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
+<td>A rate of change, such as a number of miles traveled per hour or a number of ...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -308,7 +310,7 @@
 <tr>
 <td><a href="../duration/">duration</a></td>
 <td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
+<td>a period or interval of time</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -385,6 +387,48 @@
 <td><a href="./">PlannedProcess</a></td>
 </tr>
 <tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../has_parts/">has_parts</a></td>
+<td>range</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../followed/">followed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../speed/">speed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../temperature/">temperature</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td><a href="../duration/">duration</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
 <td><a href="../Investigation/">Investigation</a></td>
 <td><a href="../has_inputs/">has_inputs</a></td>
 <td>domain</td>
@@ -499,6 +543,90 @@
 <td><a href="./">PlannedProcess</a></td>
 </tr>
 <tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../speed/">speed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../duration/">duration</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../used/">used</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../followed/">followed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td><a href="../temperature/">temperature</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../used/">used</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../followed/">followed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../has_inputs/">has_inputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../has_outputs/">has_outputs</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../speed/">speed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../temperature/">temperature</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td><a href="../duration/">duration</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
 <td><a href="../Extraction/">Extraction</a></td>
 <td><a href="../used/">used</a></td>
 <td>domain</td>
@@ -542,6 +670,18 @@
 </tr>
 <tr>
 <td><a href="../Derivatization/">Derivatization</a></td>
+<td><a href="../duration/">duration</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Derivatization/">Derivatization</a></td>
+<td><a href="../speed/">speed</a></td>
+<td>domain</td>
+<td><a href="./">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../Derivatization/">Derivatization</a></td>
 <td><a href="../used/">used</a></td>
 <td>domain</td>
 <td><a href="./">PlannedProcess</a></td>
@@ -566,19 +706,7 @@
 </tr>
 <tr>
 <td><a href="../Derivatization/">Derivatization</a></td>
-<td><a href="../speed/">speed</a></td>
-<td>domain</td>
-<td><a href="./">PlannedProcess</a></td>
-</tr>
-<tr>
-<td><a href="../Derivatization/">Derivatization</a></td>
 <td><a href="../temperature/">temperature</a></td>
-<td>domain</td>
-<td><a href="./">PlannedProcess</a></td>
-</tr>
-<tr>
-<td><a href="../Derivatization/">Derivatization</a></td>
-<td><a href="../duration/">duration</a></td>
 <td>domain</td>
 <td><a href="./">PlannedProcess</a></td>
 </tr>
@@ -771,6 +899,12 @@ attributes:
     required: true
   speed:
     name: speed
+    description: A rate of change, such as a number of miles traveled per hour or
+      a number of rotations in one minute
+    todos:
+    - these descriptions have to be generic enough that other classes can use them
+    - classes can customize many of a slot's attributes though slot_usage... but stay
+      monotonic!
     from_schema: https://w3id.org/microbiomedata/monterey-schema
     rank: 1000
     domain: PlannedProcess
@@ -778,6 +912,9 @@ attributes:
     owner: PlannedProcess
     domain_of:
     - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
     range: QuantityValue
   temperature:
     name: temperature
@@ -788,9 +925,13 @@ attributes:
     owner: PlannedProcess
     domain_of:
     - PlannedProcess
+    slot_group: structured_measurements
     range: QuantityValue
   duration:
     name: duration
+    description: a period or interval of time
+    examples:
+    - value: '{ has_numeric_value: 2, has_unit: hours }'
     from_schema: https://w3id.org/microbiomedata/monterey-schema
     rank: 1000
     domain: PlannedProcess
@@ -798,6 +939,9 @@ attributes:
     owner: PlannedProcess
     domain_of:
     - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
     range: QuantityValue
   id:
     name: id
@@ -838,6 +982,8 @@ attributes:
     name: type
     description: The type of a thing
     from_schema: https://w3id.org/microbiomedata/monterey-schema
+    aliases:
+    - designated_class
     rank: 1000
     slot_uri: rdf:type
     designates_type: true

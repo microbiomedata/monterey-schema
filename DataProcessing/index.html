@@ -278,7 +278,7 @@
 <tr>
 <td><a href="../speed/">speed</a></td>
 <td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
+<td>A rate of change, such as a number of miles traveled per hour or a number of ...</td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
 <tr>
@@ -290,7 +290,7 @@
 <tr>
 <td><a href="../duration/">duration</a></td>
 <td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
+<td>a period or interval of time</td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
 <tr>
@@ -413,6 +413,12 @@ attributes:
     required: true
   speed:
     name: speed
+    description: A rate of change, such as a number of miles traveled per hour or
+      a number of rotations in one minute
+    todos:
+    - these descriptions have to be generic enough that other classes can use them
+    - classes can customize many of a slot's attributes though slot_usage... but stay
+      monotonic!
     from_schema: https://w3id.org/microbiomedata/monterey-schema
     rank: 1000
     domain: PlannedProcess
@@ -420,6 +426,9 @@ attributes:
     owner: DataProcessing
     domain_of:
     - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
     range: QuantityValue
   temperature:
     name: temperature
@@ -430,9 +439,13 @@ attributes:
     owner: DataProcessing
     domain_of:
     - PlannedProcess
+    slot_group: structured_measurements
     range: QuantityValue
   duration:
     name: duration
+    description: a period or interval of time
+    examples:
+    - value: '{ has_numeric_value: 2, has_unit: hours }'
     from_schema: https://w3id.org/microbiomedata/monterey-schema
     rank: 1000
     domain: PlannedProcess
@@ -440,6 +453,9 @@ attributes:
     owner: DataProcessing
     domain_of:
     - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
     range: QuantityValue
   id:
     name: id
@@ -480,6 +496,8 @@ attributes:
     name: type
     description: The type of a thing
     from_schema: https://w3id.org/microbiomedata/monterey-schema
+    aliases:
+    - designated_class
     rank: 1000
     slot_uri: rdf:type
     designates_type: true

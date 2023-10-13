@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#comments">
+    Comments
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -200,6 +205,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-derivatization">Class: Derivatization</h1>
+<p><em>A technique used in chemistry which transforms a chemical compound into a product of similar chemical structure,  called a derivative. The derivative has properties more amenable to some particular analytical method.</em></p>
 <p>URI: <a href="https://w3id.org/microbiomedata/monterey-schema/Derivatization">monterey_schema:Derivatization</a></p>
 <div class="mermaid"> classDiagram
     class Derivatization
@@ -208,6 +214,14 @@
       Derivatization : category
 
           Derivatization --|&gt; GeneralCategories : category
+
+      Derivatization : contained_in
+
+          Derivatization --|&gt; Container : contained_in
+
+      Derivatization : derivatization_agent
+
+          Derivatization --|&gt; DerivatizationAgents : derivatization_agent
 
       Derivatization : description
 
@@ -234,6 +248,8 @@
       Derivatization : speed
 
           Derivatization --|&gt; QuantityValue : speed
+
+      Derivatization : temp_c
 
       Derivatization : temperature
 
@@ -275,8 +291,38 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../derivatization_agent/">derivatization_agent</a></td>
+<td>0..1 <br/> <a href="../DerivatizationAgents/">DerivatizationAgents</a></td>
+<td>A chemical entity which is used in a derivatization process to add chemical g...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../duration/">duration</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td>a period or interval of time</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../speed/">speed</a></td>
+<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
+<td>A rate of change, such as a number of miles traveled per hour or a number of ...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../temp_c/">temp_c</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
+<td>A temperature, given in Celsius degrees</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../used/">used</a></td>
 <td>0..1 <br/> <a href="../Instrument/">Instrument</a></td>
+<td></td>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+</tr>
+<tr>
+<td><a href="../contained_in/">contained_in</a></td>
+<td>0..1 <br/> <a href="../Container/">Container</a></td>
 <td></td>
 <td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
 </tr>
@@ -299,19 +345,7 @@
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
 <tr>
-<td><a href="../speed/">speed</a></td>
-<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
-<td><a href="../PlannedProcess/">PlannedProcess</a></td>
-</tr>
-<tr>
 <td><a href="../temperature/">temperature</a></td>
-<td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
-<td></td>
-<td><a href="../PlannedProcess/">PlannedProcess</a></td>
-</tr>
-<tr>
-<td><a href="../duration/">duration</a></td>
 <td>0..1 <br/> <a href="../QuantityValue/">QuantityValue</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
@@ -348,6 +382,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="comments">Comments</h2>
+<ul>
+<li>Some samples analyzed by GC require derivatization in order to make them suitable for analysis. Compounds that have poor volatility, poor thermal stability, or that can be adsorbed in the injector will exhibit non-reproducible peak areas, heights, and shapes. Other compounds that respond poorly on a specific detector may need to be “tagged” with a different functional group to improve detection.</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -377,17 +415,105 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: Derivatization
+description: A technique used in chemistry which transforms a chemical compound into
+  a product of similar chemical structure,  called a derivative. The derivative has
+  properties more amenable to some particular analytical method.
+comments:
+- Some samples analyzed by GC require derivatization in order to make them suitable
+  for analysis. Compounds that have poor volatility, poor thermal stability, or that
+  can be adsorbed in the injector will exhibit non-reproducible peak areas, heights,
+  and shapes. Other compounds that respond poorly on a specific detector may need
+  to be “tagged” with a different functional group to improve detection.
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: MaterialProcessing
+slots:
+- derivatization_agent
+- duration
+- speed
+- temp_c
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: Derivatization
+description: A technique used in chemistry which transforms a chemical compound into
+  a product of similar chemical structure,  called a derivative. The derivative has
+  properties more amenable to some particular analytical method.
+comments:
+- Some samples analyzed by GC require derivatization in order to make them suitable
+  for analysis. Compounds that have poor volatility, poor thermal stability, or that
+  can be adsorbed in the injector will exhibit non-reproducible peak areas, heights,
+  and shapes. Other compounds that respond poorly on a specific detector may need
+  to be “tagged” with a different functional group to improve detection.
 from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: MaterialProcessing
 attributes:
+  derivatization_agent:
+    name: derivatization_agent
+    description: A chemical entity which is used in a derivatization process to add
+      chemical groups to a molecule in an attempt to make it more suitable for analyses
+      like GC-MS.
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: derivatization_agent
+    owner: Derivatization
+    domain_of:
+    - Derivatization
+    range: DerivatizationAgents
+  duration:
+    name: duration
+    description: a period or interval of time
+    examples:
+    - value: '{ has_numeric_value: 2, has_unit: hours }'
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    domain: PlannedProcess
+    alias: duration
+    owner: Derivatization
+    domain_of:
+    - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
+    range: QuantityValue
+  speed:
+    name: speed
+    description: A rate of change, such as a number of miles traveled per hour or
+      a number of rotations in one minute
+    todos:
+    - these descriptions have to be generic enough that other classes can use them
+    - classes can customize many of a slot's attributes though slot_usage... but stay
+      monotonic!
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    domain: PlannedProcess
+    alias: speed
+    owner: Derivatization
+    domain_of:
+    - PlannedProcess
+    - Suspending
+    - Derivatization
+    slot_group: structured_measurements
+    range: QuantityValue
+  temp_c:
+    name: temp_c
+    description: A temperature, given in Celsius degrees.
+    comments:
+    - if there are cases in which a temperature should be constrained to degrees celsius,
+      then it should not use the QuantityValue range
+    examples:
+    - value: '95'
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    alias: temp_c
+    owner: Derivatization
+    domain_of:
+    - Derivatization
+    slot_group: fixed_unit_measurements
+    range: float
+    unit:
+      ucum_code: Cel
   used:
     name: used
     from_schema: https://w3id.org/microbiomedata/monterey-schema
@@ -399,6 +525,16 @@ attributes:
     - MaterialProcessing
     - DataGeneration
     range: Instrument
+  contained_in:
+    name: contained_in
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    domain: MaterialProcessing
+    alias: contained_in
+    owner: Derivatization
+    domain_of:
+    - MaterialProcessing
+    range: Container
   followed:
     name: followed
     from_schema: https://w3id.org/microbiomedata/monterey-schema
@@ -407,6 +543,7 @@ attributes:
     alias: followed
     owner: Derivatization
     domain_of:
+    - ProtocolExecution
     - MaterialProcessing
     - DataGeneration
     range: Protocol
@@ -433,16 +570,6 @@ attributes:
     - PlannedProcess
     range: MaterialEntity
     required: true
-  speed:
-    name: speed
-    from_schema: https://w3id.org/microbiomedata/monterey-schema
-    rank: 1000
-    domain: PlannedProcess
-    alias: speed
-    owner: Derivatization
-    domain_of:
-    - PlannedProcess
-    range: QuantityValue
   temperature:
     name: temperature
     from_schema: https://w3id.org/microbiomedata/monterey-schema
@@ -452,16 +579,7 @@ attributes:
     owner: Derivatization
     domain_of:
     - PlannedProcess
-    range: QuantityValue
-  duration:
-    name: duration
-    from_schema: https://w3id.org/microbiomedata/monterey-schema
-    rank: 1000
-    domain: PlannedProcess
-    alias: duration
-    owner: Derivatization
-    domain_of:
-    - PlannedProcess
+    slot_group: structured_measurements
     range: QuantityValue
   id:
     name: id
@@ -502,6 +620,8 @@ attributes:
     name: type
     description: The type of a thing
     from_schema: https://w3id.org/microbiomedata/monterey-schema
+    aliases:
+    - designated_class
     rank: 1000
     slot_uri: rdf:type
     designates_type: true

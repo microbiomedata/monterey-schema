@@ -331,6 +331,11 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../ProtocolExecution/">ProtocolExecution</a></td>
+<td>A PlannedProces that has PlannedProcess parts</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
 <td></td>
 <td>no</td>
@@ -346,13 +351,23 @@
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../Suspending/">Suspending</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Filtering/">Filtering</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Extraction/">Extraction</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Derivatization/">Derivatization</a></td>
-<td></td>
+<td>A technique used in chemistry which transforms a chemical compound into a pro...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -380,6 +395,7 @@ rank: 1000
 domain: PlannedProcess
 alias: followed
 domain_of:
+- ProtocolExecution
 - MaterialProcessing
 - DataGeneration
 range: Protocol

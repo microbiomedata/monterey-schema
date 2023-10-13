@@ -216,6 +216,8 @@
 
       Person : description
 
+      Person : email_address
+
       Person : id
 
       Person : name
@@ -257,6 +259,12 @@
 <td><a href="../orcid/">orcid</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>An identifier of a Person who participates in investigations</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../email_address/">email_address</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
 <td>direct</td>
 </tr>
 <tr>
@@ -343,6 +351,7 @@ from_schema: https://w3id.org/microbiomedata/monterey-schema
 is_a: MaterialEntity
 slots:
 - orcid
+- email_address
 class_uri: monterey_schema:Person
 
 </code></pre>
@@ -367,6 +376,16 @@ attributes:
     - Person
     range: uriorcurie
     required: true
+  email_address:
+    name: email_address
+    from_schema: https://w3id.org/microbiomedata/monterey-schema
+    rank: 1000
+    slot_uri: schema:email
+    alias: email_address
+    owner: Person
+    domain_of:
+    - Person
+    range: string
   id:
     name: id
     description: A unique identifier for a thing
@@ -406,6 +425,8 @@ attributes:
     name: type
     description: The type of a thing
     from_schema: https://w3id.org/microbiomedata/monterey-schema
+    aliases:
+    - designated_class
     rank: 1000
     slot_uri: rdf:type
     designates_type: true

@@ -379,7 +379,7 @@
   </a>
 
 
-<h1 id="monterey-schema">monterey-schema</h1>
+<h1 id="monterey-schema">Monterey schema</h1>
 <p>Proving grounds for a refactored nmdc-schema</p>
 <p>URI: https://w3id.org/microbiomedata/monterey-schema</p>
 <p>Name: monterey-schema</p>
@@ -392,6 +392,10 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="Container/">Container</a></td>
+<td>None</td>
+</tr>
 <tr>
 <td><a href="NmdcClass/">NmdcClass</a></td>
 <td>None</td>
@@ -466,10 +470,14 @@
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Derivatization/">Derivatization</a></td>
-<td>None</td>
+<td>A technique used in chemistry which transforms a chemical compound into a product of similar chemical structure,  called a derivative. The derivative has properties more amenable to some particular analytical method.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Extraction/">Extraction</a></td>
+<td>None</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Filtering/">Filtering</a></td>
 <td>None</td>
 </tr>
 <tr>
@@ -479,6 +487,14 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Sieving/">Sieving</a></td>
 <td>None</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Suspending/">Suspending</a></td>
+<td>None</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ProtocolExecution/">ProtocolExecution</a></td>
+<td>A PlannedProces that has PlannedProcess parts. Can be used to represent the case of someone following a Protocol</td>
 </tr>
 </tbody>
 </table>
@@ -496,8 +512,16 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="contained_in/">contained_in</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="depth/">depth</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="derivatization_agent/">derivatization_agent</a></td>
+<td>A chemical entity which is used in a derivatization process to add chemical g...</td>
 </tr>
 <tr>
 <td><a href="description/">description</a></td>
@@ -505,6 +529,14 @@
 </tr>
 <tr>
 <td><a href="duration/">duration</a></td>
+<td>a period or interval of time</td>
+</tr>
+<tr>
+<td><a href="email_address/">email_address</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="fixed_unit_measurements/">fixed_unit_measurements</a></td>
 <td></td>
 </tr>
 <tr>
@@ -532,6 +564,10 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="has_parts/">has_parts</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="has_raw_value/">has_raw_value</a></td>
 <td></td>
 </tr>
@@ -542,6 +578,10 @@
 <tr>
 <td><a href="id/">id</a></td>
 <td>A unique identifier for a thing</td>
+</tr>
+<tr>
+<td><a href="mesh_size_mm/">mesh_size_mm</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="name/">name</a></td>
@@ -556,12 +596,28 @@
 <td>An identifier of a Person who participates in investigations</td>
 </tr>
 <tr>
+<td><a href="paper_grade/">paper_grade</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="part_of/">part_of</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="process_collection/">process_collection</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="speed/">speed</a></td>
+<td>A rate of change, such as a number of miles traveled per hour or a number of ...</td>
+</tr>
+<tr>
+<td><a href="structured_measurements/">structured_measurements</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="temp_c/">temp_c</a></td>
+<td>A temperature, given in Celsius degrees</td>
 </tr>
 <tr>
 <td><a href="temperature/">temperature</a></td>
@@ -579,6 +635,10 @@
 <td><a href="used/">used</a></td>
 <td></td>
 </tr>
+<tr>
+<td><a href="volume/">volume</a></td>
+<td></td>
+</tr>
 </tbody>
 </table>
 <h2 id="enumerations">Enumerations</h2>
@@ -591,7 +651,23 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="ContainerCategories/">ContainerCategories</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="DerivatizationAgents/">DerivatizationAgents</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="GeneralCategories/">GeneralCategories</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="PaperGrade/">PaperGrade</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ProtocolExecutionCategoryEnum/">ProtocolExecutionCategoryEnum</a></td>
 <td></td>
 </tr>
 </tbody>
