@@ -1,11 +1,17 @@
 id: https://w3id.org/microbiomedata/monterey-schema
 name: monterey-schema
-title: monterey-schema
+title: Monterey schema
 description: |-
   Proving grounds for a refactored nmdc-schema
 license: MIT
 see_also:
   - https://microbiomedata.github.io/monterey-schema
+
+comments:
+  - Chris would prefer more lumping via an enumerated category designator
+
+imports:
+  - linkml:types
 
 prefixes:
   monterey_schema: https://w3id.org/microbiomedata/monterey-schema/
@@ -15,11 +21,10 @@ prefixes:
   example: https://example.org/ # linter warning  Schema maps prefix 'example' to namespace 'https://example.org/' instead of namespace 'http://www.example.org/rdf#'  (canonical_prefixes)
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   schema: http://schema.org/
+
 default_prefix: monterey_schema
 default_range: string
 
-imports:
-  - linkml:types
 
 classes:
 
@@ -32,6 +37,13 @@ classes:
     slots:
       - type
       - category
+
+  Container:
+    slots:
+      - volume
+    slot_usage:
+      category:
+        range: ContainerCategories
 
   AttributeValue:
     is_a: AnonymousThing
@@ -97,6 +109,18 @@ classes:
       - temperature
       - duration
 
+  ProtocolExecution:
+    is_a: PlannedProcess
+    description: A PlannedProces that has PlannedProcess parts. Can be used to represent the case of someone following a Protocol
+    slots:
+      - has_parts
+      - followed
+    slot_usage:
+      category:
+        range: ProtocolExecutionCategoryEnum
+      has_parts:
+        range: PlannedProcess
+
   Investigation:
     aliases:
       - Study
@@ -116,16 +140,61 @@ classes:
         range: MaterialEntity
     slots:
       - used
+      - contained_in
       - followed
 
   Sieving:
     is_a: MaterialProcessing
+    class_uri: monterey_schema:Sieving
+    comments:
+      - Removes rocks from soil samples
+    slots:
+      - mesh_size_mm
+
+  Suspending:
+    is_a: MaterialProcessing
+    class_uri: monterey_schema:Suspending
+    comments:
+      - Suspends the sieved portion of soil samples in water
+    slots:
+      - speed
+      - duration
+    slot_usage:
+      speed:
+        description: mixing speed
+
+  Filtering:
+    is_a: MaterialProcessing
+    class_uri: monterey_schema:Filtering
+    comments:
+      - Separates the suspended portion of soil samples from the water
+    slots:
+      - paper_grade
 
   Extraction:
     is_a: MaterialProcessing
 
   Derivatization:
     is_a: MaterialProcessing
+    description: >-
+      A technique used in chemistry which transforms a chemical compound into a product of similar chemical structure, 
+      called a derivative. The derivative has properties more amenable to some particular analytical method.
+    comments:
+      - Some samples analyzed by GC require derivatization in order to make them suitable for analysis.
+        Compounds that have poor volatility, poor thermal stability, or that can be adsorbed in the injector
+        will exhibit non-reproducible peak areas, heights, and shapes. Other compounds that respond poorly
+        on a specific detector may need to be “tagged” with a different functional group to improve detection.
+    slots:
+      - derivatization_agent
+      - duration
+      - speed
+      - temp_c
+      #      - concentration # "The concentration of a substance used in an activity" MAM how is this an attribute of a process?
+      #      - container_type # "A type of container. i.e. test tube, falcon tube, etc." MAM is this the container in which the derivatization took place?
+      #      - derivatization
+      #      - mixing
+      #      - sample_volume
+      #      - volume
 
   SampleCollection:
     is_a: MaterialProcessing
@@ -162,40 +231,26 @@ classes:
     class_uri: monterey_schema:Person
     slots:
       - orcid
+      - email_address
 
   Instrument:
     is_a: MaterialEntity
     class_uri: monterey_schema:Instrument
+    todos:
+      - reconsider calling this Device? so that it could be used to model containers?
 
   Protocol:
     is_a: DataEntity
     class_uri: monterey_schema:Protocol
 
-
-#  Person:
-#    is_a: NamedThing
-#    description: >-
-#      Represents a Person
-#    slots:
-#      - primary_email
-#      - birth_date
-#      - age_in_years
-#      - vital_status
-#    slot_usage:
-#      primary_email:
-#        pattern: "^\\S+@[\\S+\\.]+\\S+"
-#
-#  PersonCollection:
-#    tree_root: true
-#    description: >-
-#      A holder for Person objects
-#    attributes:
-#      entries:
-#        range: Person
-#        multivalued: true
-#        inlined: true
-
 slots:
+
+  structured_measurements:
+    is_grouping_slot: true
+
+  fixed_unit_measurements:
+    is_grouping_slot: true
+
   has_inputs:
     domain: PlannedProcess
     range: MaterialOrData
@@ -231,6 +286,8 @@ slots:
     range: PlannedProcess
 
   type:
+    aliases:
+      - designated_class
     slot_uri: rdf:type
     range: uriorcurie
     designates_type: true
@@ -279,34 +336,85 @@ slots:
     is_a: has_numeric_value
 
   speed:
+    slot_group: structured_measurements
     domain: PlannedProcess
     range: QuantityValue
+    description: A rate of change, such as a number of miles traveled per hour or a number of rotations in one minute
+    todos:
+      - these descriptions have to be generic enough that other classes can use them
+      - classes can customize many of a slot's attributes though slot_usage... but stay monotonic!
 
   temperature:
+    slot_group: structured_measurements
     domain: PlannedProcess
     range: QuantityValue
+
+  temp_c:
+    slot_group: fixed_unit_measurements
+    range: float
+    unit:
+      ucum_code: Cel
+    description: A temperature, given in Celsius degrees.
+    comments:
+      - if there are cases in which a temperature should be constrained to degrees celsius, then it should not use the QuantityValue range
+    examples:
+      - value: 95
+
+  mesh_size_mm:
+    slot_group: fixed_unit_measurements
+    range: float
+    unit:
+      ucum_code: mm
+    domain: Sieving
+    required: true
+    comments:
+      - The mesh size, in millimeters, used for sieving
 
   duration:
+    slot_group: structured_measurements
     domain: PlannedProcess
     range: QuantityValue
+    description: a period or interval of time
+    examples:
+      - value: "{ has_numeric_value: 2, has_unit: hours }"
 
   depth:
+    slot_group: structured_measurements
     domain: Site
     range: QuantityValue
 
-#  primary_email:
-#    slot_uri: schema:email
-#    description: The main email address of a person
-#  birth_date:
-#    slot_uri: schema:birthDate
-#    range: date
-#    description: Date on which a person is born
-#  age_in_years:
-#    range: integer
-#    description: Number of years since birth
-#  vital_status:
-#    range: PersonStatus
-#    description: living or dead status
+  derivatization_agent:
+    range: DerivatizationAgents
+    description: A chemical entity which is used in a derivatization process
+      to add chemical groups to a molecule in an attempt to make it more
+      suitable for analyses like GC-MS. # MAM edited
+
+  has_parts:
+    multivalued: true
+    range: NmdcClass
+
+  part_of:
+    multivalued: true
+    range: NmdcClass
+
+  email_address:
+    slot_uri: schema:email
+    range: string
+
+  paper_grade:
+    domain: Filtering
+    range: PaperGrade
+    required: true
+
+  contained_in:
+    domain: MaterialProcessing
+    range: Container
+
+  volume:
+    domain: Container
+    range: QuantityValue
+    required: true
+
 
 enums:
   GeneralCategories:
@@ -315,15 +423,60 @@ enums:
       green: { }
       blue: { }
 
-#  PersonStatus:
-#    permissible_values:
-#      ALIVE:
-#        description: the person is living
-#        meaning: PATO:0001421
-#      DEAD:
-#        description: the person is deceased
-#        meaning: PATO:0001422
-#      UNKNOWN:
-#        description: the vital status is not known
-#        todos:
-#          - map this to an ontology
+  DerivatizationAgents:
+    permissible_values:
+      BSTFA: { }
+
+  PaperGrade:
+    permissible_values:
+      - grade_1
+      - grade_2
+      - grade_3
+      - grade_4
+      - grade_602_h
+
+  ProtocolExecutionCategoryEnum:
+    permissible_values:
+      - obtaining_solutes
+      - baking_cake
+
+  ContainerCategories:
+    permissible_values:
+      - vial
+      - tube
+      - plate
+      - well
+      - bag
+      - flask
+      - bot
+
+
+##
+
+#slots:
+#  container_type:
+#    range: ContainerTypeEnum
+#    description: The type of container in which a material entity was stored or processed
+
+## these could be called collections
+#  sample_preparation_set:
+#    mixins:
+#      - object_set
+#    domain: Database
+#    range: SamplePreparation
+#  campaign_set:
+#    mixins:
+#      - object_set
+#    domain: Database
+#    range: Campaign
+
+## specializations of general slots
+#  stir_rate_rpm:
+#    domain: Suspending
+#    range: float
+#    required: true
+#  stir_time_min:
+#    domain: Suspending
+#    range: float
+#    required: true
+
